@@ -1,12 +1,17 @@
-import { Component } from 'react';
-import styles from './HomePage.module.scss'
+import { Component, Fragment } from 'react';
 import Header from '../Header/Header';
+import CardsList from '../CardsList/CardsList';
 
 class HomePage extends Component {
   render() {
 
     return (
-      <Header />
+      <Fragment>
+        <Header />
+        <main className='main'>
+
+        </main>
+      </Fragment>
     );
   }
 }

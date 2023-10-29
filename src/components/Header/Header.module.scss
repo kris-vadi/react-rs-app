@@ -1,7 +1,16 @@
 .header {
-  background-color: #9dafab;
+  background-color: #294a58;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
+}
+
+.logo {
+  min-width: 117px;
+  min-height: 50px;
+  background-image: url('../../assets/icons/star-wars-logo.svg');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: contain;
 }

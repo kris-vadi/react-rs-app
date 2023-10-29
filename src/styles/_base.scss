@@ -9,4 +9,8 @@ body {
   color: $font;
   background-color: $background-light;
   min-height: 100vh;
+  background-image: url('../assets/images/star-wars-background.jpg');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
 }

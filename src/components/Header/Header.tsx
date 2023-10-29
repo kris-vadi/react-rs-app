@@ -8,7 +8,7 @@ class Header extends Component {
     return (
       <header className={styles.header}>
         <div className={styles.logo}></div>
-        <Search onSearch={}/>
+        <Search />
       </header>
     );
   }
