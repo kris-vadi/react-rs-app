@@ -40,6 +40,11 @@ class HomePage extends Component<HomePageProps, HomePageState> {
     });
   };
 
+  componentDidMount() {
+    const currentSearchValue = localStorage.getItem('search-input');
+    this.setState({ searchInput: currentSearchValue || '' });
+  }
+
   render() {
     return (
       <Fragment>
