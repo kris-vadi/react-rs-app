@@ -7,7 +7,7 @@ type HomePageProps = Record<string, never>;
 
 interface HomePageState {
   cards: CardParams[];
-  searchInput: string | null;
+  searchInput: string | '';
   isLoading: boolean;
 }
 
@@ -16,26 +16,38 @@ class HomePage extends Component<HomePageProps, HomePageState> {
     super(props);
     this.state = {
       cards: [],
-      searchInput: null,
+      searchInput: '',
       isLoading: false,
     };
   }
 
-  fetchCards = (searchText?: string) => {
-    let url = `https://swapi.dev/api/planets/${searchText}`;
+  getSearchResult = async () => {
+    this.setState({
+      isLoading: true,
+    });
+
+    await this.fetchCards(this.state.searchInput);
+  };
+
+  fetchCards = (searchText?: string | '') => {
+    let url = `https://swapi.dev/api/planets`;
 
     fetch(url)
       .then((response) => response.json())
       .then((cards: CardParams[]) => {
         console.log(cards);
         this.setState({ cards: [] });
+        console.log(this.state);
+        this.setState({ isLoading: false });
+        console.log(this.state);
       })
-      .catch(() => {});
+      .catch((error) => {
+        this.setState({ isLoading: false });
+      });
   };
 
   handleSearch = (newValue: string) => {
     this.setState({
-      ...this.state,
       searchInput: newValue,
     });
   };
