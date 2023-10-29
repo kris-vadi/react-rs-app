@@ -1,13 +1,10 @@
-import './app.scss'
+import HomePage from "./components/HomePage/HomePage"
 
 function App() {
 
   return (
-    <>
-      <div>
-      </div>
-    </>
+    <HomePage />
   )
 }
 
-export default App
+export default App;
