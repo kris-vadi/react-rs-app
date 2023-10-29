@@ -1,4 +1,4 @@
-import  {Component} from 'react';
+import { Component } from 'react';
 import styles from './Search.module.scss';
 
 interface SearchProps {
@@ -10,11 +10,21 @@ interface SearchState {
 }
 
 export class Search extends Component<SearchProps, SearchState> {
-  constructor(props: SearchProps) {
-    super(props);
-    this.state = { inputValue: '' };
-  }
-  
+  state: SearchState = {
+    inputValue: '',
+  };
+
+  handleInputChange = (event: React.BaseSyntheticEvent) => {
+    this.setState({
+      inputValue: event.target.value,
+    });
+    localStorage.setItem('search-input', event.target.value.trim());
+  };
+
+  handleSearch = () => {
+    this.props.onSearch(this.state.inputValue.trim());
+  };
+
   render() {
     return (
       <form className={styles.form}>
@@ -22,14 +32,10 @@ export class Search extends Component<SearchProps, SearchState> {
           className={styles.input}
           type="text"
           placeholder="Search..."
-          //value=...
-          onChange={(event) => console.log(event)}
+          value={this.state.inputValue}
+          onChange={this.handleInputChange}
         ></input>
-        <button
-          className={styles.submit}
-          //onClick=...
-        >
-        </button>
+        <button className={styles.submit} onClick={this.handleSearch}></button>
       </form>
     );
   }

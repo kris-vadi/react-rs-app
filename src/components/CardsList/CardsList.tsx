@@ -10,15 +10,15 @@ type CardsListProps = {
 class CardsList extends Component<CardsListProps> {
   constructor(props: CardsListProps) {
     super(props);
+    console.log(this.props.cards);
   }
+
   render() {
     return (
       <div className={styles.list}>
-        {
-          this.props.cards.map((card, index) => (
-            <Card key={index} itemData={card} />
-          ))
-        }
+        {this.props.cards.map((card, index) => (
+          <Card key={index} itemData={card} />
+        ))}
       </div>
     );
   }

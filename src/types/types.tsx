@@ -4,5 +4,4 @@ export type CardParams = {
   climate: string;
   terrain: string;
   population: string;
-}
-
+};

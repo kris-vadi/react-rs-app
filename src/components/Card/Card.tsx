@@ -12,7 +12,8 @@ class Card extends Component<CardProps> {
   }
 
   render() {
-    const { name, diameter, climate, terrain, population } = this.props.itemData;
+    const { name, diameter, climate, terrain, population } =
+      this.props.itemData;
 
     return (
       <div className={styles.card}>
