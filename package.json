@@ -7,16 +7,18 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint ./src --ext .ts",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier ./src --check",
-    "format:fix": "prettier ./src --write"
+    "format": "prettier . --check",
+    "format:fix": "prettier . --write",
+    "lint-staged": "lint-staged $STAGED_FILES"
   },
   "lint-staged": {
-    "*.(js|ts)": [
-      "eslint ./src --fix",
-      "prettier ./src --write"
-    ]
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,scss}": "prettier --write"
   },
   "dependencies": {
     "react": "^18.2.0",
