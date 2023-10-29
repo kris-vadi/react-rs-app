@@ -31,7 +31,11 @@ class HomePage extends Component<HomePageProps, HomePageState> {
   };
 
   fetchCards = (searchText?: string | '') => {
-    let url = `https://swapi.dev/api/planets/?search=${searchText}`;
+    let url = `https://swapi.dev/api/planets/`;
+
+    if (searchText && searchText.trim() !== '') {
+      url += `?search=${searchText}`;
+    }
 
     fetch(url)
       .then((response) => response.json())
