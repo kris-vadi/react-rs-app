@@ -12,11 +12,9 @@ class CardsList extends Component<CardsListProps> {
   render() {
     return (
       <div className={styles.list}>
-        { 
-            this.props.cards.map((card, index) => (
-              <Card key={index} itemData={card} />
-            ))
-        }
+        {this.props.cards.map((card, index) => (
+          <Card key={index} itemData={card} />
+        ))}
       </div>
     );
   }

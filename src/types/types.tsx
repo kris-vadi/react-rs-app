@@ -9,4 +9,4 @@ export type CardParams = {
 export type ResponseParams = {
   count: number;
   results: CardParams[];
-}
+};
