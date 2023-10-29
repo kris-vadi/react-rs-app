@@ -8,11 +8,6 @@ type CardsListProps = {
 };
 
 class CardsList extends Component<CardsListProps> {
-  constructor(props: CardsListProps) {
-    super(props);
-    console.log(this.props.cards);
-  }
-
   render() {
     return (
       <div className={styles.list}>

@@ -25,6 +25,11 @@ export class Search extends Component<SearchProps, SearchState> {
     this.props.onSearch(this.state.inputValue.trim());
   };
 
+  componentDidMount() {
+    const currentValue = localStorage.getItem('search-input');
+    this.setState({ inputValue: currentValue || '' });
+  }
+
   render() {
     return (
       <form className={styles.form}>

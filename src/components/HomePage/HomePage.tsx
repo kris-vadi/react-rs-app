@@ -7,6 +7,8 @@ type HomePageProps = Record<string, never>;
 
 interface HomePageState {
   cards: CardParams[];
+  searchInput: string | null;
+  isLoading: boolean;
 }
 
 class HomePage extends Component<HomePageProps, HomePageState> {
@@ -14,6 +16,8 @@ class HomePage extends Component<HomePageProps, HomePageState> {
     super(props);
     this.state = {
       cards: [],
+      searchInput: null,
+      isLoading: false,
     };
   }
 
@@ -29,12 +33,17 @@ class HomePage extends Component<HomePageProps, HomePageState> {
       .catch(() => {});
   };
 
-  fetch = this.fetchCards('');
+  handleSearch = (newValue: string) => {
+    this.setState({
+      ...this.state,
+      searchInput: newValue,
+    });
+  };
 
   render() {
     return (
       <Fragment>
-        <Header />
+        <Header onSearch={this.handleSearch} />
         <main className="main">
           <CardsList cards={this.state.cards} />
         </main>
