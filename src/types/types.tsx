@@ -5,3 +5,8 @@ export type CardParams = {
   terrain: string;
   population: string;
 };
+
+export type ResponseParams = {
+  count: number;
+  results: CardParams[];
+}

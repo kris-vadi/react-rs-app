@@ -1,7 +1,7 @@
 import { Component, Fragment } from 'react';
 import Header from '../Header/Header';
 import CardsList from '../CardsList/CardsList';
-import { CardParams } from '../../types/types';
+import { CardParams, ResponseParams } from '../../types/types';
 
 type HomePageProps = Record<string, never>;
 
@@ -27,16 +27,18 @@ class HomePage extends Component<HomePageProps, HomePageState> {
     });
 
     await this.fetchCards(this.state.searchInput);
+    console.log(this.state.searchInput)
   };
 
   fetchCards = (searchText?: string | '') => {
-    let url = `https://swapi.dev/api/planets`;
+    let url = `https://swapi.dev/api/planets/?search=${searchText}`;
 
     fetch(url)
       .then((response) => response.json())
-      .then((cards: CardParams[]) => {
-        console.log(cards);
-        this.setState({ cards: [] });
+      .then((response: ResponseParams) => {
+        console.log(response);
+        const currentCards: CardParams[] = response.results;
+        this.setState({ cards: currentCards });
         console.log(this.state);
         this.setState({ isLoading: false });
         console.log(this.state);
@@ -57,12 +59,18 @@ class HomePage extends Component<HomePageProps, HomePageState> {
     this.setState({ searchInput: currentSearchValue || '' });
   }
 
+  componentDidUpdate(prevProps: Readonly<HomePageProps>, prevState: Readonly<HomePageState>, snapshot?: any): void {
+    if (this.state.searchInput !== prevState.searchInput && this.state.searchInput !== '' ) {
+      this.getSearchResult();
+    }
+  }
+
   render() {
     return (
       <Fragment>
         <Header onSearch={this.handleSearch} />
         <main className="main">
-          <CardsList cards={this.state.cards} />
+          <CardsList cards={this.state.cards} isLoading={this.state.isLoading}/>
         </main>
       </Fragment>
     );
