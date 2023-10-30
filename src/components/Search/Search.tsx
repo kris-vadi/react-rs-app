@@ -15,6 +15,7 @@ export class Search extends Component<SearchProps, SearchState> {
   };
 
   handleInputChange = (event: React.BaseSyntheticEvent) => {
+    event.preventDefault;
     this.setState({
       inputValue: event.target.value,
     });

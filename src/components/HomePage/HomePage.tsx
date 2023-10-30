@@ -54,19 +54,19 @@ class HomePage extends Component<HomePageProps, HomePageState> {
     });
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const currentSearchValue = localStorage.getItem('search-input');
     this.setState({ searchInput: currentSearchValue || '' });
+    if (currentSearchValue === '') {
+      await this.getSearchResult();
+    }
   }
 
   async componentDidUpdate(
     prevProps: Readonly<HomePageProps>,
     prevState: Readonly<HomePageState>
   ): Promise<void> {
-    if (
-      this.state.searchInput !== prevState.searchInput &&
-      this.state.searchInput !== ''
-    ) {
+    if (this.state.searchInput !== prevState.searchInput) {
       await this.getSearchResult();
     }
   }
