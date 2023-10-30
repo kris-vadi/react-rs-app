@@ -33,7 +33,7 @@ export class Search extends Component<SearchProps, SearchState> {
 
   render() {
     return (
-      <form className={styles.form}>
+      <div className={styles.form}>
         <input
           className={styles.input}
           type="text"
@@ -42,7 +42,7 @@ export class Search extends Component<SearchProps, SearchState> {
           onChange={this.handleInputChange}
         ></input>
         <button className={styles.submit} onClick={this.handleSearch}></button>
-      </form>
+      </div>
     );
   }
 }
