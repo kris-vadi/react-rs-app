@@ -14,9 +14,9 @@
     "lint-staged": "lint-staged $STAGED_FILES"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
+    "src/**/*.{ts,tsx}": [
+      "eslint . --fix",
+      "prettier --write ."
     ],
     "*.{css,scss}": "prettier --write"
   },
