@@ -18,13 +18,13 @@ class HomePage extends Component<HomePageProps, HomePageState> {
     this.state = {
       cards: [],
       searchInput: '',
-      isLoading: true,
+      isLoading: false,
     };
   }
 
   getSearchResult = async () => {
     this.setState({
-      isLoading: false,
+      isLoading: true,
     });
 
     await this.fetchCards(this.state.searchInput);
@@ -41,15 +41,12 @@ class HomePage extends Component<HomePageProps, HomePageState> {
     await fetch(url)
       .then((response) => response.json())
       .then((response: ResponseParams) => {
-        console.log(response);
         const currentCards: CardParams[] = response.results;
         this.setState({ cards: currentCards });
-        console.log(this.state);
-        this.setState({ isLoading: true });
-        console.log(this.state);
+        this.setState({ isLoading: false });
       })
       .catch((error) => {
-        this.setState({ isLoading: true });
+        this.setState({ isLoading: false });
       });
   };
 
@@ -66,8 +63,7 @@ class HomePage extends Component<HomePageProps, HomePageState> {
 
   componentDidUpdate(
     prevProps: Readonly<HomePageProps>,
-    prevState: Readonly<HomePageState>,
-    snapshot?: any
+    prevState: Readonly<HomePageState>
   ): void {
     if (
       this.state.searchInput !== prevState.searchInput &&
