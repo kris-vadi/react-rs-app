@@ -28,26 +28,24 @@ class HomePage extends Component<HomePageProps, HomePageState> {
     });
 
     await this.fetchCards(this.state.searchInput);
-    console.log(this.state.searchInput);
   };
 
-  fetchCards = async (searchText?: string | '') => {
+  fetchCards = async (searchText?: string) => {
     let url = `https://swapi.dev/api/planets/`;
 
     if (searchText && searchText.trim() !== '') {
       url += `?search=${searchText}`;
     }
 
-    await fetch(url)
-      .then((response) => response.json())
-      .then((response: ResponseParams) => {
-        const currentCards: CardParams[] = response.results;
-        this.setState({ cards: currentCards });
-        this.setState({ isLoading: false });
-      })
-      .catch((error) => {
-        this.setState({ isLoading: false });
-      });
+    try {
+      const response = await fetch(url);
+      const data: ResponseParams = await response.json();
+      const currentCards: CardParams[] = data.results;
+      this.setState({ cards: currentCards });
+      this.setState({ isLoading: false });
+    } catch (error) {
+      this.setState({ isLoading: false });
+    }
   };
 
   handleSearch = (newValue: string) => {
@@ -61,15 +59,15 @@ class HomePage extends Component<HomePageProps, HomePageState> {
     this.setState({ searchInput: currentSearchValue || '' });
   }
 
-  componentDidUpdate(
+  async componentDidUpdate(
     prevProps: Readonly<HomePageProps>,
     prevState: Readonly<HomePageState>
-  ): void {
+  ): Promise<void> {
     if (
       this.state.searchInput !== prevState.searchInput &&
       this.state.searchInput !== ''
     ) {
-      this.getSearchResult();
+      await this.getSearchResult();
     }
   }
 

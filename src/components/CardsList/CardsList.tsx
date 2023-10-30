@@ -12,13 +12,15 @@ class CardsList extends Component<CardsListProps> {
   render() {
     return (
       <div className={styles.list}>
-        { this.props.isLoading ? 
-          <div className={styles.loader}></div>:
-          this.props.cards.length > 0 ? 
+        {this.props.isLoading ? (
+          <div className={styles.loader}></div>
+        ) : this.props.cards.length > 0 ? (
           this.props.cards.map((card, index) => (
             <Card key={index} itemData={card} />
-          )) : 'Sorry, no items match your search...'
-        }
+          ))
+        ) : (
+          'Sorry, no items match your search...'
+        )}
       </div>
     );
   }
