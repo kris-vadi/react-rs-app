@@ -54,21 +54,21 @@ class HomePage extends Component<HomePageProps, HomePageState> {
     });
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     const currentSearchValue: string | null =
       localStorage.getItem('search-input');
     this.setState({ searchInput: currentSearchValue || '' });
     if (currentSearchValue === '' || currentSearchValue === null) {
-      await this.getSearchResult();
+      this.getSearchResult();
     }
   }
 
-  async componentDidUpdate(
+  componentDidUpdate(
     prevProps: Readonly<HomePageProps>,
     prevState: Readonly<HomePageState>
-  ): Promise<void> {
+  ): void {
     if (this.state.searchInput !== prevState.searchInput) {
-      await this.getSearchResult();
+      this.getSearchResult();
     }
   }
 
