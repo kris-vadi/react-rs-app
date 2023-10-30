@@ -37,7 +37,8 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
-    'no-console': 'error'
+    'no-console': 'error',
+    "@typescript-eslint/no-unused-vars": "error"
   },
   settings: {
     react: {
