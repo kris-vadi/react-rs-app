@@ -9,20 +9,22 @@ type CardsListProps = {
 };
 
 class CardsList extends Component<CardsListProps> {
+  renderContent() {
+    if (this.props.isLoading) {
+      return <div className={styles.loader}></div>;
+    }
+
+    if (this.props.cards.length > 0) {
+      return this.props.cards.map((card, index) => (
+        <Card key={index} itemData={card} />
+      ));
+    }
+
+    return <p>{'Sorry, no items match your search...'}</p>;
+  }
+
   render() {
-    return (
-      <div className={styles.list}>
-        {this.props.isLoading ? (
-          <div className={styles.loader}></div>
-        ) : this.props.cards.length > 0 ? (
-          this.props.cards.map((card, index) => (
-            <Card key={index} itemData={card} />
-          ))
-        ) : (
-          'Sorry, no items match your search...'
-        )}
-      </div>
-    );
+    return <div className={styles.list}>{this.renderContent()}</div>;
   }
 }
 
