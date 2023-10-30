@@ -26,6 +26,11 @@ export class Search extends Component<SearchProps, SearchState> {
     this.props.onSearch(this.state.inputValue.trim());
   };
 
+  handleSubmit = (event: React.BaseSyntheticEvent) => {
+    event.preventDefault();
+    this.props.onSearch(this.state.inputValue.trim());
+  };
+
   componentDidMount() {
     const currentValue = localStorage.getItem('search-input');
     this.setState({ inputValue: currentValue || '' });
@@ -33,7 +38,7 @@ export class Search extends Component<SearchProps, SearchState> {
 
   render() {
     return (
-      <div className={styles.form}>
+      <form className={styles.form} onSubmit={this.handleSubmit}>
         <input
           className={styles.input}
           type="text"
@@ -42,7 +47,7 @@ export class Search extends Component<SearchProps, SearchState> {
           onChange={this.handleInputChange}
         ></input>
         <button className={styles.submit} onClick={this.handleSearch}></button>
-      </div>
+      </form>
     );
   }
 }
