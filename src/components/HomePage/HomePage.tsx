@@ -55,7 +55,8 @@ class HomePage extends Component<HomePageProps, HomePageState> {
   };
 
   async componentDidMount() {
-    const currentSearchValue: string | null = localStorage.getItem('search-input');
+    const currentSearchValue: string | null =
+      localStorage.getItem('search-input');
     this.setState({ searchInput: currentSearchValue || '' });
     if (currentSearchValue === '' || currentSearchValue === null) {
       await this.getSearchResult();
