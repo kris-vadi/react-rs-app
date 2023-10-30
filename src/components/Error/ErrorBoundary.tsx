@@ -1,7 +1,7 @@
 import { Component, ReactNode } from 'react';
+import styles from '../HomePage/HomePage.module.scss';
 
 type ErrorBoundaryProps = {
-  fallback: ReactNode;
   children: ReactNode;
 };
 
@@ -21,7 +21,11 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   render() {
     if (this.state.hasError) {
-      return this.props.fallback;
+      return (
+        <main className={styles.main}>
+          Something went wrong... Please reload the page.
+        </main>
+      );
     }
     return this.props.children;
   }

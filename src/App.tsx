@@ -3,7 +3,7 @@ import ErrorBoundary from './components/Error/ErrorBoundary';
 
 function App() {
   return (
-    <ErrorBoundary fallback={<p className="fallback">Something went wrong</p>}>
+    <ErrorBoundary>
       <HomePage />
     </ErrorBoundary>
   );
