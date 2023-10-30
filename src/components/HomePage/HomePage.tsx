@@ -8,7 +8,7 @@ type HomePageProps = Record<string, never>;
 
 interface HomePageState {
   cards: CardParams[];
-  searchInput: string | '';
+  searchInput: string | null;
   isLoading: boolean;
 }
 
@@ -17,7 +17,7 @@ class HomePage extends Component<HomePageProps, HomePageState> {
     super(props);
     this.state = {
       cards: [],
-      searchInput: '',
+      searchInput: null,
       isLoading: false,
     };
   }
@@ -30,7 +30,7 @@ class HomePage extends Component<HomePageProps, HomePageState> {
     await this.fetchCards(this.state.searchInput);
   };
 
-  fetchCards = async (searchText?: string) => {
+  fetchCards = async (searchText?: string | null) => {
     let url = `https://swapi.dev/api/planets/`;
 
     if (searchText && searchText.trim() !== '') {
@@ -55,9 +55,9 @@ class HomePage extends Component<HomePageProps, HomePageState> {
   };
 
   async componentDidMount() {
-    const currentSearchValue = localStorage.getItem('search-input');
+    const currentSearchValue: string | null = localStorage.getItem('search-input');
     this.setState({ searchInput: currentSearchValue || '' });
-    if (currentSearchValue === '') {
+    if (currentSearchValue === '' || currentSearchValue === null) {
       await this.getSearchResult();
     }
   }
