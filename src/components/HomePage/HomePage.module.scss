@@ -1,0 +1,16 @@
+.main {
+  background-image: url('../../assets/images/star-wars-background.jpg');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+  min-height: 100vh;
+  text-align: center;
+  color: white;
+  padding-top: 90px;
+}
+
+@media screen and (max-width: 687px) {
+  .main {
+    padding-top: 200px;
+  }
+}
