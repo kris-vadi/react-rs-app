@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, ErrorInfo } from 'react';
 import styles from '../HomePage/HomePage.module.scss';
 import { ErrorBoundaryProps, ErrorBoundaryState } from '../../types/types';
 
@@ -10,6 +10,11 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   static getDerivedStateFromError() {
     return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.log('Error Boundry:');
+    console.log(errorInfo);
   }
 
   render() {

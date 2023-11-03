@@ -2,14 +2,15 @@ import { Component, Fragment } from 'react';
 import styles from './HomePage.module.scss';
 import Header from '../Header/Header';
 import CardsList from '../CardsList/CardsList';
-import { CardParams, ResponseParams } from '../../types/types';
+import { CardParams } from '../../types/types';
+import getCards from '../../API/Api';
 
 type HomePageProps = Record<string, never>;
 
 interface HomePageState {
   cards: CardParams[];
   searchInput: string | null;
-  isLoading: boolean;
+  isCardsLoading: boolean;
 }
 
 class HomePage extends Component<HomePageProps, HomePageState> {
@@ -18,34 +19,21 @@ class HomePage extends Component<HomePageProps, HomePageState> {
     this.state = {
       cards: [],
       searchInput: null,
-      isLoading: false,
+      isCardsLoading: false,
     };
   }
 
   getSearchResult = async () => {
-    this.setState({
-      isLoading: true,
-    });
+    this.setState({ isCardsLoading: true });
 
-    await this.fetchCards(this.state.searchInput);
-  };
-
-  fetchCards = async (searchText?: string | null) => {
-    let url = `https://swapi.dev/api/planets/`;
-
-    if (searchText && searchText.trim() !== '') {
-      url += `?search=${searchText}`;
-    }
-
-    try {
-      const response = await fetch(url);
-      const data: ResponseParams = await response.json();
-      const currentCards: CardParams[] = data.results;
+    const currentCards: CardParams[] | undefined = await getCards(
+      this.state.searchInput
+    );
+    if (currentCards) {
       this.setState({ cards: currentCards });
-      this.setState({ isLoading: false });
-    } catch (error) {
-      this.setState({ isLoading: false });
     }
+
+    this.setState({ isCardsLoading: false });
   };
 
   handleSearch = (newValue: string) => {
@@ -58,9 +46,6 @@ class HomePage extends Component<HomePageProps, HomePageState> {
     const currentSearchValue: string | null =
       localStorage.getItem('search-input');
     this.setState({ searchInput: currentSearchValue || '' });
-    if (currentSearchValue === '' || currentSearchValue === null) {
-      this.getSearchResult();
-    }
   }
 
   componentDidUpdate(
@@ -79,7 +64,7 @@ class HomePage extends Component<HomePageProps, HomePageState> {
         <main className={styles.main}>
           <CardsList
             cards={this.state.cards}
-            isLoading={this.state.isLoading}
+            isLoading={this.state.isCardsLoading}
           />
         </main>
       </Fragment>
