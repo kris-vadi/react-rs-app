@@ -2,6 +2,7 @@ import { Component } from 'react';
 import styles from './CardsList.module.scss';
 import Card from '../Card/Card';
 import { CardParams } from '../../types/types';
+import Loader from '../UI/Loader/Loader';
 
 type CardsListProps = {
   cards: CardParams[];
@@ -11,7 +12,7 @@ type CardsListProps = {
 class CardsList extends Component<CardsListProps> {
   renderContent() {
     if (this.props.isLoading) {
-      return <div className={styles.loader}></div>;
+      return <Loader />;
     }
 
     if (this.props.cards.length > 0) {
