@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .form {
   display: flex;
   align-items: center;
@@ -20,9 +22,9 @@
   background-repeat: no-repeat;
   background-position: left center;
   background-size: contain;
-  background-color: #4e8186;
+  background-color: $button;
   transition: all 0.5s ease-in-out;
   &:hover {
-    background-color: darken(#4e8186, 5%);
+    background-color: darken($button, 5%);
   }
 }

@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .card {
   display: flex;
   flex-direction: column;
@@ -6,7 +8,7 @@
   border-radius: 20px;
   padding: 20px;
   align-items: center;
-  background-color: rgba(#c6cfb7, 0.8);
+  background-color: rgba($background-card, 0.8);
   color: #343434;
 }
 
@@ -15,7 +17,7 @@
   font-weight: 600;
   text-transform: uppercase;
   font-size: 1.8rem;
-  text-shadow: 1px 1px 0 rgba(#ffc402, 0.4);
+  text-shadow: 1px 1px 0 rgba($yellow, 0.4);
 }
 
 .subtitle {
