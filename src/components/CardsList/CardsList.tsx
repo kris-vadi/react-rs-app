@@ -1,32 +1,24 @@
-import { Component } from 'react';
 import styles from './CardsList.module.scss';
 import Card from '../Card/Card';
-import { CardParams } from '../../types/types';
+import { CardParams, CardsListProps } from '../../types/types';
 import Loader from '../UI/Loader/Loader';
 
-type CardsListProps = {
-  cards: CardParams[];
-  isLoading: boolean;
-};
-
-class CardsList extends Component<CardsListProps> {
-  renderContent() {
-    if (this.props.isLoading) {
+const CardsList = (props: CardsListProps) => {
+  function renderContent() {
+    if (props.isLoading) {
       return <Loader />;
     }
 
-    if (this.props.cards.length > 0) {
-      return this.props.cards.map((card, index) => (
-        <Card key={index} itemData={card} />
+    if (props.cards && props.cards.length > 0) {
+      return props.cards.map((card: CardParams, index: number) => (
+        <Card key={`${card.name}${index}`} itemData={card} />
       ));
     }
 
     return <p>{'Sorry, no items match your search...'}</p>;
   }
 
-  render() {
-    return <div className={styles.list}>{this.renderContent()}</div>;
-  }
-}
+  return <div className={styles.list}>{renderContent()}</div>;
+};
 
 export default CardsList;

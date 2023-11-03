@@ -1,4 +1,4 @@
-import { CardParams, ResponseParams } from '../types/types';
+import { ResponseData } from '../types/types';
 
 const BASE_URL = 'https://swapi.dev/api/planets/';
 
@@ -7,10 +7,9 @@ const getCards = async (searchText?: string | null, page: number = 1) => {
     const response = await fetch(
       `${BASE_URL}?search=${searchText}&page=${page}`
     );
-    const data: ResponseParams = await response.json();
-    const currentCards: CardParams[] = data.results;
+    const data: ResponseData = await response.json();
 
-    return currentCards;
+    return data;
   } catch (error) {
     console.log(error);
   }

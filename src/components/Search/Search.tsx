@@ -1,55 +1,37 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import styles from './Search.module.scss';
+import { SearchProps } from '../../types/types';
 
-interface SearchProps {
-  onSearch: (value: string) => void;
-}
+const Search = (props: SearchProps) => {
+  const [inputValue, setInputValue] = useState<string>('');
 
-interface SearchState {
-  inputValue: string;
-}
-
-export class Search extends Component<SearchProps, SearchState> {
-  state: SearchState = {
-    inputValue: '',
-  };
-
-  handleInputChange = (event: React.BaseSyntheticEvent) => {
+  function handleInputChange(event: React.BaseSyntheticEvent) {
     event.preventDefault();
-    this.setState({
-      inputValue: event.target.value,
-    });
+    setInputValue(event.target.value.trim());
     localStorage.setItem('search-input', event.target.value.trim());
-  };
+  }
 
-  handleSearch = () => {
-    this.props.onSearch(this.state.inputValue.trim());
-  };
+  function handleSearch() {
+    props.onSearch(inputValue);
+  }
 
-  handleSubmit = (event: React.BaseSyntheticEvent) => {
+  function handleSubmit(event: React.BaseSyntheticEvent) {
     event.preventDefault();
-    this.props.onSearch(this.state.inputValue.trim());
-  };
-
-  componentDidMount() {
-    const currentValue = localStorage.getItem('search-input');
-    this.setState({ inputValue: currentValue || '' });
+    props.onSearch(inputValue);
   }
 
-  render() {
-    return (
-      <form className={styles.form} onSubmit={this.handleSubmit}>
-        <input
-          className={styles.input}
-          type="text"
-          placeholder="Search..."
-          value={this.state.inputValue}
-          onChange={this.handleInputChange}
-        ></input>
-        <button className={styles.submit} onClick={this.handleSearch}></button>
-      </form>
-    );
-  }
-}
+  return (
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <input
+        className={styles.input}
+        type="text"
+        placeholder="Search..."
+        value={inputValue}
+        onChange={handleInputChange}
+      ></input>
+      <button className={styles.submit} onClick={handleSearch}></button>
+    </form>
+  );
+};
 
 export default Search;

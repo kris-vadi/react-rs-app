@@ -1,25 +1,22 @@
-import React, { Component } from 'react';
+import { useState } from 'react';
 import styles from './ErrorButton.module.scss';
 
-class ErrorButton extends Component {
-  state = {
-    hasError: false,
-  };
+const ErrorButton = () => {
+  const [isError, setIsError] = useState<boolean>(false);
 
-  handleClick = () => {
-    this.setState({ hasError: true });
-  };
-
-  render() {
-    if (this.state.hasError) {
-      throw new Error('Synthetic error');
-    }
-    return (
-      <button className={styles.errorButton} onClick={this.handleClick}>
-        Generate error
-      </button>
-    );
+  function generateError() {
+    setIsError(true);
   }
-}
+
+  if (isError) {
+    throw new Error('Error Buttton Generator');
+  }
+
+  return (
+    <button className={styles.errorButton} onClick={generateError}>
+      Generate error
+    </button>
+  );
+};
 
 export default ErrorButton;

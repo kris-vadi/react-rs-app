@@ -1,75 +1,51 @@
-import { Component, Fragment } from 'react';
-import styles from './HomePage.module.scss';
+import { useEffect, useState } from 'react';
+import { ResponseData, SearchParams } from '../../types/types';
+import getCards from '../../API/Api';
 import Header from '../Header/Header';
 import CardsList from '../CardsList/CardsList';
-import { CardParams } from '../../types/types';
-import getCards from '../../API/Api';
+import styles from './HomePage.module.scss';
 
-type HomePageProps = Record<string, never>;
+const HomePage = () => {
+  const [searchParams, setSearchParams] = useState<SearchParams>({
+    searchInputValue: localStorage.getItem('search-input'),
+    page: 1,
+  });
 
-interface HomePageState {
-  cards: CardParams[];
-  searchInput: string | null;
-  isCardsLoading: boolean;
-}
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-class HomePage extends Component<HomePageProps, HomePageState> {
-  constructor(props: HomePageProps) {
-    super(props);
-    this.state = {
-      cards: [],
-      searchInput: null,
-      isCardsLoading: false,
-    };
-  }
+  const [responseData, setResponseData] = useState<ResponseData>();
 
-  getSearchResult = async () => {
-    this.setState({ isCardsLoading: true });
+  async function getSearchResult() {
+    setIsLoading(true);
 
-    const currentCards: CardParams[] | undefined = await getCards(
-      this.state.searchInput
+    const currentResponseData: ResponseData | undefined = await getCards(
+      searchParams.searchInputValue,
+      searchParams.page
     );
-    if (currentCards) {
-      this.setState({ cards: currentCards });
+
+    if (currentResponseData) {
+      setResponseData(currentResponseData);
     }
 
-    this.setState({ isCardsLoading: false });
-  };
-
-  handleSearch = (newValue: string) => {
-    this.setState({
-      searchInput: newValue,
-    });
-  };
-
-  componentDidMount() {
-    const currentSearchValue: string | null =
-      localStorage.getItem('search-input');
-    this.setState({ searchInput: currentSearchValue || '' });
+    setIsLoading(false);
   }
 
-  componentDidUpdate(
-    prevProps: Readonly<HomePageProps>,
-    prevState: Readonly<HomePageState>
-  ): void {
-    if (this.state.searchInput !== prevState.searchInput) {
-      this.getSearchResult();
-    }
+  function handleSearch(newValue: string) {
+    setSearchParams({ searchInputValue: newValue, page: 1 });
   }
 
-  render() {
-    return (
-      <Fragment>
-        <Header onSearch={this.handleSearch} />
-        <main className={styles.main}>
-          <CardsList
-            cards={this.state.cards}
-            isLoading={this.state.isCardsLoading}
-          />
-        </main>
-      </Fragment>
-    );
-  }
-}
+  useEffect(() => {
+    getSearchResult();
+  }, [searchParams]);
+
+  return (
+    <>
+      <Header onSearch={handleSearch} />
+      <main className={styles.main}>
+        <CardsList cards={responseData?.results} isLoading={isLoading} />
+      </main>
+    </>
+  );
+};
 
 export default HomePage;
