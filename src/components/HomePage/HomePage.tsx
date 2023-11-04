@@ -62,11 +62,13 @@ const HomePage = () => {
       </header>
       <main className={styles.main}>
         <CardsList cards={responseData?.results} isLoading={isLoading} />
-        <Pagination
-          onPage={onPageChange}
-          responseData={responseData}
-          page={searchParams.page}
-        />
+        {!isLoading && (
+          <Pagination
+            onPage={onPageChange}
+            responseData={responseData}
+            page={searchParams.page}
+          />
+        )}
       </main>
     </>
   );
