@@ -25,7 +25,7 @@ const Search = (props: SearchProps) => {
       <input
         className={styles.input}
         type="text"
-        placeholder="Search..."
+        placeholder="Search... your planet"
         value={inputValue}
         onChange={handleInputChange}
       ></input>

@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .main {
   background-image: url('../../assets/images/star-wars-background.jpg');
   background-repeat: no-repeat;
@@ -9,7 +11,24 @@
   padding-top: 90px;
 }
 
+.header {
+  background-color: $background;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  gap: 20px;
+}
+
 @media screen and (max-width: 687px) {
+  .header {
+    flex-direction: column;
+  }
+
   .main {
     padding-top: 200px;
   }
