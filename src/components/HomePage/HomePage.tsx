@@ -36,7 +36,7 @@ const HomePage = () => {
 
   useEffect(() => {
     getSearchResult();
-  }, [searchParams]);
+  }, [searchParams.searchInputValue]);
 
   return (
     <>
