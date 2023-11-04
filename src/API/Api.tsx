@@ -8,10 +8,6 @@ const getCards = async (searchText?: string | null, page: number = 1) => {
       `${BASE_URL}?search=${searchText}&page=${page}`
     );
     const data: ResponseData = await response.json();
-    console.log(data?.count);
-    console.log(data?.results);
-    console.log(data?.previous);
-    console.log(data?.next);
 
     return data;
   } catch (error) {

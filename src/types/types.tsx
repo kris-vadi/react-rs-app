@@ -34,6 +34,7 @@ export interface CardsListProps {
 }
 
 export interface SearchProps {
+  inputInitialValue: string | null;
   onSearch: (value: string) => void;
 }
 

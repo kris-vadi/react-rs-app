@@ -10,7 +10,9 @@ import Pagination from '../Pagination/Pagination';
 
 const HomePage = () => {
   const [searchParams, setSearchParams] = useState<SearchParams>({
-    searchInputValue: localStorage.getItem('search-input'),
+    searchInputValue: localStorage.getItem('search-input')
+      ? localStorage.getItem('search-input')
+      : '',
     page: 1,
   });
 
@@ -52,7 +54,10 @@ const HomePage = () => {
     <>
       <header className={styles.header}>
         <Logo />
-        <Search onSearch={handleSearch} />
+        <Search
+          onSearch={handleSearch}
+          inputInitialValue={searchParams.searchInputValue}
+        />
         <ErrorButton />
       </header>
       <main className={styles.main}>

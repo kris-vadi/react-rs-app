@@ -3,7 +3,9 @@ import styles from './Search.module.scss';
 import { SearchProps } from '../../types/types';
 
 const Search = (props: SearchProps) => {
-  const [inputValue, setInputValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>(
+    props.inputInitialValue ? props.inputInitialValue : ''
+  );
 
   function handleInputChange(event: React.BaseSyntheticEvent) {
     event.preventDefault();
