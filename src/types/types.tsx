@@ -5,7 +5,9 @@ export type CardParams = {
   diameter: string;
   climate: string;
   terrain: string;
+  surface_water: string;
   population: string;
+  url: string;
 };
 
 export type ResponseData = {
@@ -15,7 +17,7 @@ export type ResponseData = {
   results: CardParams[];
 };
 
-export type SearchParams = {
+export type SearchData = {
   searchInputValue: string | null;
   page: number;
 };
@@ -31,6 +33,7 @@ export type ErrorBoundaryState = {
 export interface CardsListProps {
   cards: CardParams[] | undefined;
   isLoading: boolean;
+  query: string;
 }
 
 export interface SearchProps {
@@ -40,6 +43,7 @@ export interface SearchProps {
 
 export interface CardProps {
   itemData: CardParams;
+  query: string;
 }
 
 export interface PaginationProps {

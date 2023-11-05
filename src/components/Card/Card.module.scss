@@ -11,6 +11,10 @@
   background-color: rgba($background-card, 0.8);
   color: #343434;
   font-size: 1.4rem;
+  cursor: pointer;
+  &:hover {
+    background-color: $background-card;
+  }
 }
 
 .title {

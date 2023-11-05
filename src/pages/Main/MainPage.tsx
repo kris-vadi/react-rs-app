@@ -1,31 +1,36 @@
 import { useEffect, useState } from 'react';
-import { ResponseData, SearchParams } from '../../types/types';
-import getCards from '../../API/Api';
-import CardsList from '../../components/CardsList/CardsList';
+import { Outlet, useSearchParams } from 'react-router-dom';
+import { ResponseData, SearchData } from '../../types/types';
 import styles from './MainPage.module.scss';
+import getCards from '../../API/GetCards';
+import CardsList from '../../components/CardsList/CardsList';
 import Search from '../../components/Search/Search';
 import ErrorButton from '../../components/Error/ErrorButton';
 import Logo from '../../components/UI/Logo/Logo';
 import Pagination from '../../components/Pagination/Pagination';
 
 const MainPage = () => {
-  const [searchParams, setSearchParams] = useState<SearchParams>({
+  const [searchData, setSearchData] = useState<SearchData>({
     searchInputValue: localStorage.getItem('search-input')
       ? localStorage.getItem('search-input')
       : '',
     page: 1,
   });
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [responseData, setResponseData] = useState<ResponseData>();
+
+  const query = searchParams.get('page') || '';
 
   async function getSearchResult() {
     setIsLoading(true);
 
     const currentResponseData: ResponseData | undefined = await getCards(
-      searchParams.searchInputValue,
-      searchParams.page
+      searchData.searchInputValue,
+      searchData.page
     );
 
     if (currentResponseData) {
@@ -36,19 +41,20 @@ const MainPage = () => {
   }
 
   function handleSearch(newValue: string) {
-    setSearchParams({ searchInputValue: newValue, page: 1 });
+    setSearchData({ searchInputValue: newValue, page: 1 });
   }
 
   function onPageChange(page: number) {
-    setSearchParams({
-      searchInputValue: searchParams.searchInputValue,
+    setSearchData({
+      searchInputValue: searchData.searchInputValue,
       page: page,
     });
   }
 
   useEffect(() => {
     getSearchResult();
-  }, [searchParams.searchInputValue, searchParams.page]);
+    setSearchParams({ page: searchData.page.toString() });
+  }, [searchData.searchInputValue, searchData.page]);
 
   return (
     <>
@@ -56,19 +62,26 @@ const MainPage = () => {
         <Logo />
         <Search
           onSearch={handleSearch}
-          inputInitialValue={searchParams.searchInputValue}
+          inputInitialValue={searchData.searchInputValue}
         />
         <ErrorButton />
       </header>
       <main className={styles.main}>
-        <CardsList cards={responseData?.results} isLoading={isLoading} />
-        {!isLoading && (
-          <Pagination
-            onPage={onPageChange}
-            responseData={responseData}
-            page={searchParams.page}
+        <section className={styles.content}>
+          <CardsList
+            cards={responseData?.results}
+            isLoading={isLoading}
+            query={query}
           />
-        )}
+          {!isLoading && (
+            <Pagination
+              onPage={onPageChange}
+              responseData={responseData}
+              page={searchData.page}
+            />
+          )}
+        </section>
+        <Outlet />
       </main>
     </>
   );
