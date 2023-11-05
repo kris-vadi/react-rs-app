@@ -1,5 +1,5 @@
 import { Component, ErrorInfo } from 'react';
-import styles from '../HomePage/HomePage.module.scss';
+import styles from '../../pages/Main/MainPage.module.scss';
 import { ErrorBoundaryProps, ErrorBoundaryState } from '../../types/types';
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {

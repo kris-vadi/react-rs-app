@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { ResponseData, SearchParams } from '../../types/types';
 import getCards from '../../API/Api';
-import CardsList from '../CardsList/CardsList';
-import styles from './HomePage.module.scss';
-import Search from '../Search/Search';
-import ErrorButton from '../Error/ErrorButton';
-import Logo from '../UI/Logo/Logo';
-import Pagination from '../Pagination/Pagination';
+import CardsList from '../../components/CardsList/CardsList';
+import styles from './MainPage.module.scss';
+import Search from '../../components/Search/Search';
+import ErrorButton from '../../components/Error/ErrorButton';
+import Logo from '../../components/UI/Logo/Logo';
+import Pagination from '../../components/Pagination/Pagination';
 
-const HomePage = () => {
+const MainPage = () => {
   const [searchParams, setSearchParams] = useState<SearchParams>({
     searchInputValue: localStorage.getItem('search-input')
       ? localStorage.getItem('search-input')
@@ -74,4 +74,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default MainPage;
