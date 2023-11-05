@@ -1,0 +1,34 @@
+@import '../../styles/variables.scss';
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 200px;
+  border-radius: 20px;
+  padding: 20px;
+  align-items: center;
+  background-color: rgba($background-card, 0.8);
+  color: #343434;
+  font-size: 1.4rem;
+  cursor: pointer;
+  &:hover {
+    background-color: $background-card;
+  }
+}
+
+.title {
+  color: #294a58;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  text-shadow: 1px 1px 0 rgba($yellow, 0.4);
+}
+
+.subtitle {
+  text-align: center;
+  font-weight: 600;
+  & > span {
+    font-weight: 400;
+  }
+}

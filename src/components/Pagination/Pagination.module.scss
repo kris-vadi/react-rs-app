@@ -1,0 +1,55 @@
+@import '../../styles/variables.scss';
+
+.pagination {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px 40px;
+}
+
+.prevButton,
+.nextButton {
+  width: 46px;
+  height: 46px;
+  background-color: $button;
+  border-radius: 50%;
+  position: relative;
+  opacity: 0.7;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    opacity: 0.9;
+    background-color: darken($button, 5%);
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    right: calc(50% - 9px);
+    top: calc(50% - 6px);
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    padding: 6px;
+    transform: rotate(135deg);
+  }
+  &:disabled {
+    opacity: 0.1;
+    &:hover {
+      opacity: 0.1;
+      background-color: initial;
+    }
+  }
+}
+
+.nextButton {
+  &::before {
+    transform: rotate(-45deg);
+    left: calc(50% - 9px);
+    right: inherit;
+  }
+}
+
+.pageNumber {
+  font-size: 2rem;
+  font-weight: 600;
+  color: $yellow;
+}
