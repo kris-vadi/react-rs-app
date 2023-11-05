@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { CardParams } from '../../types/types';
 import getCardInfo from '../../API/GetCardInfo';
 import Loader from '../UI/Loader/Loader';
+import CloseButton from '../UI/CloseButton/CloseButton';
+import ItemInfoLine from '../UI/ItemInfoLine/ItemInfoLine';
 
 const CardInfo = () => {
   const [responseData, setResponseData] = useState<CardParams>();
@@ -42,29 +44,19 @@ const CardInfo = () => {
 
     return (
       <>
+        <CloseButton callback={goBack} />
         <h1 className={styles.title}>{responseData?.name}</h1>
-        <div className={styles.subtitle}>
-          diameter:
-          <span className={styles.description}>{responseData?.diameter}</span>
-        </div>
-        <div className={styles.subtitle}>
-          climate:
-          <span className={styles.description}>{responseData?.climate}</span>
-        </div>
-        <div className={styles.subtitle}>
-          terrain:
-          <span className={styles.description}>{responseData?.terrain}</span>
-        </div>
-        <div className={styles.subtitle}>
-          surface water:
-          <span className={styles.description}>
-            {responseData?.surface_water}
-          </span>
-        </div>
-        <div className={styles.subtitle}>
-          population:
-          <span className={styles.description}>{responseData?.population}</span>
-        </div>
+        <ItemInfoLine text="diameter" description={responseData?.diameter} />
+        <ItemInfoLine text="climate" description={responseData?.climate} />
+        <ItemInfoLine text="terrain" description={responseData?.terrain} />
+        <ItemInfoLine
+          text="surface water"
+          description={responseData?.surface_water}
+        />
+        <ItemInfoLine
+          text="population"
+          description={responseData?.population}
+        />
       </>
     );
   }

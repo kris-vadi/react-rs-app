@@ -51,3 +51,12 @@ export interface PaginationProps {
   responseData: ResponseData | undefined;
   page: number;
 }
+
+export interface CloseButtonProps {
+  callback: () => void;
+}
+
+export interface ItemInfoLineProps {
+  text: string;
+  description: string | undefined;
+}

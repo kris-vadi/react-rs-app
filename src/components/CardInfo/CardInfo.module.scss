@@ -2,7 +2,6 @@
 
 .dimming {
   position: absolute;
-  background-color: $background;
   opacity: 0.3;
   width: 100%;
   height: 100%;
@@ -11,19 +10,30 @@
 }
 
 .details {
-  min-width: 40%;
-  background-color: $background;
+  width: 40%;
+  background-color: rgba($background, 70%);
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 20px;
 }
 
-@media screen and (max-width: 687px) {
+h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: $yellow;
+}
+
+@media screen and (max-width: 887px) {
   .details {
-    min-width: 50%;
+    width: 50%;
   }
 }
 
 @media screen and (max-width: 687px) {
   .details {
-    min-width: 60%;
+    width: 70%;
   }
 }
