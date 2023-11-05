@@ -19,8 +19,6 @@ const CardInfo = () => {
   const goBack = () => navigate(-1);
 
   async function getSearchResult() {
-    setIsLoading(true);
-
     const currentResponseData: CardParams | undefined = await getCardInfo(
       location.pathname.slice(-1)
     );
@@ -28,13 +26,12 @@ const CardInfo = () => {
     if (currentResponseData) {
       setResponseData(currentResponseData);
     }
-
-    setIsLoading(false);
   }
 
   useEffect(() => {
+    setIsLoading(true);
     getSearchResult();
-    console.log(isLoading);
+    setIsLoading(false);
   }, []);
 
   function renderContent() {
