@@ -20,7 +20,7 @@ const CardInfo = () => {
 
   async function getSearchResult() {
     const currentResponseData: CardParams | undefined = await getCardInfo(
-      location.pathname.slice(-1)
+      location.pathname
     );
 
     if (currentResponseData) {
@@ -42,17 +42,27 @@ const CardInfo = () => {
     return (
       <>
         <CloseButton callback={goBack} />
-        <h1 className={styles.title}>{responseData?.name}</h1>
-        <ItemInfoLine text="diameter" description={responseData?.diameter} />
-        <ItemInfoLine text="climate" description={responseData?.climate} />
-        <ItemInfoLine text="terrain" description={responseData?.terrain} />
+        <img
+          src={responseData?.attributes.image}
+          alt={responseData?.attributes.slug}
+          className={styles.image}
+        />
+        <h1 className={styles.title}>{responseData?.attributes.name}</h1>
         <ItemInfoLine
-          text="surface water"
-          description={responseData?.surface_water}
+          text="gender"
+          description={responseData?.attributes.gender}
         />
         <ItemInfoLine
-          text="population"
-          description={responseData?.population}
+          text="blud status"
+          description={responseData?.attributes.blood_status}
+        />
+        <ItemInfoLine
+          text="nationality"
+          description={responseData?.attributes.nationality}
+        />
+        <ItemInfoLine
+          text="species"
+          description={responseData?.attributes.species}
         />
       </>
     );

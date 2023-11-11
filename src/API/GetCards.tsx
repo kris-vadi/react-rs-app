@@ -1,11 +1,14 @@
 import { ResponseData } from '../types/types';
+import { BASE_URL } from './constants';
 
-const BASE_URL = 'https://swapi.dev/api/planets/';
-
-const getCards = async (searchText?: string | null, page: number = 1) => {
+const getCards = async (
+  searchText?: string | null,
+  page: number = 1,
+  limit: number = 10
+) => {
   try {
     const response = await fetch(
-      `${BASE_URL}?search=${searchText}&page=${page}`
+      `${BASE_URL}??filter[name_cont]=${searchText}&page[number]=${page}&page[size]=${limit}`
     );
     const data: ResponseData = await response.json();
 

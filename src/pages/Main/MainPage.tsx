@@ -69,7 +69,7 @@ const MainPage = () => {
       <main className={styles.main}>
         <section className={styles.content}>
           <CardsList
-            cards={responseData?.results}
+            cards={responseData?.data}
             isLoading={isLoading}
             query={query}
           />

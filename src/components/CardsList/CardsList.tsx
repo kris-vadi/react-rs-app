@@ -11,11 +11,7 @@ const CardsList = (props: CardsListProps) => {
 
     if (props.cards && props.cards.length > 0) {
       return props.cards.map((card: CardParams, index: number) => (
-        <Card
-          key={`${card.name}${index}`}
-          itemData={card}
-          query={props.query}
-        />
+        <Card key={`${card.attributes.name}${index}`} itemData={card} />
       ));
     }
 
