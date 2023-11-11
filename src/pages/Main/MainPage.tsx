@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Outlet, useSearchParams } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { ResponseData, SearchData } from '../../types/types';
 import styles from './MainPage.module.scss';
 import getCards from '../../API/GetCards';
@@ -17,13 +17,11 @@ const MainPage = () => {
     page: 1,
   });
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [responseData, setResponseData] = useState<ResponseData>();
-
-  const query = searchParams.get('page') || '';
 
   async function getSearchResult() {
     setIsLoading(true);
@@ -53,7 +51,7 @@ const MainPage = () => {
 
   useEffect(() => {
     getSearchResult();
-    setSearchParams({ page: searchData.page.toString() });
+    navigate(`/page/${searchData.page}`);
   }, [searchData.searchInputValue, searchData.page]);
 
   return (
@@ -68,11 +66,7 @@ const MainPage = () => {
       </header>
       <main className={styles.main}>
         <section className={styles.content}>
-          <CardsList
-            cards={responseData?.data}
-            isLoading={isLoading}
-            query={query}
-          />
+          <CardsList cards={responseData?.data} isLoading={isLoading} />
           {!isLoading && (
             <Pagination
               onPage={onPageChange}

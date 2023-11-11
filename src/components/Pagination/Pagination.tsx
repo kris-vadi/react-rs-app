@@ -3,15 +3,11 @@ import styles from './Pagination.module.scss';
 
 const Pagination = (props: PaginationProps) => {
   function handlePrevButton() {
-    if (props.responseData?.previous) {
-      props.onPage(props.page - 1);
-    }
+    props.onPage(props.page - 1);
   }
 
   function handleNextButton() {
-    if (props.responseData?.next) {
-      props.onPage(props.page + 1);
-    }
+    props.onPage(props.page + 1);
   }
 
   return (
@@ -19,13 +15,13 @@ const Pagination = (props: PaginationProps) => {
       <button
         className={styles.prevButton}
         onClick={handlePrevButton}
-        disabled={props.responseData?.previous === 'null'}
+        disabled={props.responseData?.meta.pagination.current === 1}
       ></button>
       <div className={styles.pageNumber}>{props.page}</div>
       <button
         className={styles.nextButton}
         onClick={handleNextButton}
-        disabled={props.responseData?.next === 'null'}
+        disabled={props.responseData?.meta.pagination.last === undefined}
       ></button>
     </div>
   );

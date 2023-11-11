@@ -6,6 +6,7 @@ import getCardInfo from '../../API/GetCardInfo';
 import Loader from '../UI/Loader/Loader';
 import CloseButton from '../UI/CloseButton/CloseButton';
 import ItemInfoLine from '../UI/ItemInfoLine/ItemInfoLine';
+import { getCardId } from '../../utils/utils';
 
 const CardInfo = () => {
   const [responseData, setResponseData] = useState<CardParams>();
@@ -18,21 +19,27 @@ const CardInfo = () => {
 
   const goBack = () => navigate(-1);
 
-  async function getSearchResult() {
-    const currentResponseData: CardParams | undefined = await getCardInfo(
-      location.pathname
-    );
+  async function getSearchResult(id: string) {
+    setIsLoading(true);
+
+    const currentResponseData: CardParams | undefined = await getCardInfo(id);
 
     if (currentResponseData) {
       setResponseData(currentResponseData);
     }
+
+    setIsLoading(false);
   }
 
   useEffect(() => {
-    setIsLoading(true);
-    getSearchResult();
-    setIsLoading(false);
-  }, []);
+    const id: string | undefined = getCardId(location.pathname);
+
+    if (id) {
+      getSearchResult(id);
+    } else {
+      navigate('/not-found');
+    }
+  }, [location.pathname, navigate]);
 
   function renderContent() {
     if (isLoading) {
@@ -42,11 +49,13 @@ const CardInfo = () => {
     return (
       <>
         <CloseButton callback={goBack} />
-        <img
-          src={responseData?.attributes.image}
-          alt={responseData?.attributes.slug}
-          className={styles.image}
-        />
+        {responseData?.attributes.image && (
+          <img
+            src={responseData?.attributes.image}
+            alt={responseData?.attributes.slug}
+            className={styles.image}
+          />
+        )}
         <h1 className={styles.title}>{responseData?.attributes.name}</h1>
         <ItemInfoLine
           text="gender"

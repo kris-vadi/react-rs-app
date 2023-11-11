@@ -54,7 +54,6 @@ export type ErrorBoundaryState = {
 export interface CardsListProps {
   cards: CardParams[] | undefined;
   isLoading: boolean;
-  query: string;
 }
 
 export interface SearchProps {

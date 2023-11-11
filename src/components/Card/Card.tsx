@@ -5,7 +5,7 @@ import ItemInfoLine from '../UI/ItemInfoLine/ItemInfoLine';
 
 const Card = (props: CardProps) => {
   return (
-    <Link to={props.itemData.id} className={styles.card}>
+    <Link to={`details/${props.itemData.id}`} className={styles.card}>
       <h2 className={styles.title}>{props.itemData.attributes.name}</h2>
       <ItemInfoLine
         text="gender"
