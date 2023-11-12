@@ -24,29 +24,26 @@ const MainPage = () => {
 
   const [responseData, setResponseData] = useState<ResponseData>();
 
-  async function getSearchResult() {
-    setIsLoading(true);
+  useEffect(() => {
+    async function getSearchResult() {
+      setIsLoading(true);
 
-    const currentResponseData: ResponseData | undefined = await getCards(
-      searchData.searchInputValue,
-      searchData.page,
-      searchData.pageLimit
-    );
+      const currentResponseData: ResponseData | undefined = await getCards(
+        searchData.searchInputValue,
+        searchData.page,
+        searchData.pageLimit
+      );
 
-    if (currentResponseData) {
-      setResponseData(currentResponseData);
+      if (currentResponseData) {
+        setResponseData(currentResponseData);
+      }
+
+      setIsLoading(false);
     }
 
-    setIsLoading(false);
-  }
-
-  function updateURL() {
-    navigate(`/page/${searchData.page}`);
-  }
-
-  useEffect(() => {
     getSearchResult();
-    updateURL();
+
+    navigate(`/page/${searchData.page}`);
   }, [searchData.page, searchData.pageLimit, searchData.searchInputValue]);
 
   return (
