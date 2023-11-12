@@ -1,20 +1,24 @@
 import { PaginationProps } from './PaginationProps';
 import styles from './Pagination.module.scss';
+import { useContext } from 'react';
+import { DataContext } from '../../pages/Main/MainPage';
 
 const Pagination = (props: PaginationProps) => {
+  const { searchData, setSearchData } = useContext(DataContext);
+
   function handlePrevButton() {
-    props.setSearchData({
-      searchInputValue: props.searchData.searchInputValue,
-      pageLimit: props.searchData.pageLimit,
-      page: props.searchData.page - 1,
+    setSearchData({
+      searchInputValue: searchData.searchInputValue,
+      pageLimit: searchData.pageLimit,
+      page: searchData.page - 1,
     });
   }
 
   function handleNextButton() {
-    props.setSearchData({
-      searchInputValue: props.searchData.searchInputValue,
-      pageLimit: props.searchData.pageLimit,
-      page: props.searchData.page + 1,
+    setSearchData({
+      searchInputValue: searchData.searchInputValue,
+      pageLimit: searchData.pageLimit,
+      page: searchData.page + 1,
     });
   }
 
@@ -25,7 +29,7 @@ const Pagination = (props: PaginationProps) => {
         onClick={handlePrevButton}
         disabled={props.responseData?.meta.pagination.current === 1}
       ></button>
-      <div className={styles.pageNumber}>{props.searchData.page}</div>
+      <div className={styles.pageNumber}>{searchData.page}</div>
       <button
         className={styles.nextButton}
         onClick={handleNextButton}

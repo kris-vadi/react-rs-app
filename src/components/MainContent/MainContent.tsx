@@ -12,13 +12,7 @@ const MainContent = (props: MainContentProps) => {
           cards={props.responseData?.data}
           isLoading={props.isLoading}
         />
-        {!props.isLoading && (
-          <Pagination
-            setSearchData={props.setSearchData}
-            searchData={props.searchData}
-            responseData={props.responseData}
-          />
-        )}
+        {!props.isLoading && <Pagination responseData={props.responseData} />}
       </section>
       <Outlet />
     </main>

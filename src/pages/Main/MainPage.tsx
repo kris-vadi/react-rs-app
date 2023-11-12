@@ -1,9 +1,25 @@
-import { useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ResponseData, SearchData } from '../../types/types';
 import getCards from '../../API/GetCards';
 import MainContent from '../../components/MainContent/MainContent';
 import Header from '../../components/Header/Header';
+
+interface DataContextParams {
+  searchData: SearchData;
+  setSearchData: (searchData: SearchData) => void;
+}
+
+const initData: SearchData = {
+  searchInputValue: '',
+  pageLimit: '10',
+  page: 1,
+};
+
+export const DataContext = createContext<DataContextParams>({
+  searchData: initData,
+  setSearchData: () => {},
+});
 
 const MainPage = () => {
   const [searchData, setSearchData] = useState<SearchData>({
@@ -48,15 +64,10 @@ const MainPage = () => {
   }, [searchData.page, searchData.pageLimit, searchData.searchInputValue]);
 
   return (
-    <>
-      <Header setSearchData={setSearchData} searchData={searchData} />
-      <MainContent
-        setSearchData={setSearchData}
-        searchData={searchData}
-        responseData={responseData}
-        isLoading={isLoading}
-      />
-    </>
+    <DataContext.Provider value={{ searchData, setSearchData }}>
+      <Header />
+      <MainContent responseData={responseData} isLoading={isLoading} />
+    </DataContext.Provider>
   );
 };
 

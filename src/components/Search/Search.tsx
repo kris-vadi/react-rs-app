@@ -1,11 +1,14 @@
+import { useContext } from 'react';
+import { DataContext } from '../../pages/Main/MainPage';
 import styles from './Search.module.scss';
-import { SearchProps } from './SearchProps';
 
-const Search = (props: SearchProps) => {
+const Search = () => {
+  const { searchData, setSearchData } = useContext(DataContext);
+
   function setNewValue(newValue: string) {
-    props.setSearchData({
+    setSearchData({
       searchInputValue: newValue,
-      pageLimit: props.searchData.pageLimit,
+      pageLimit: searchData.pageLimit,
       page: 1,
     });
   }
@@ -26,7 +29,7 @@ const Search = (props: SearchProps) => {
         className={styles.input}
         type="text"
         placeholder="Search..."
-        value={props.searchData.searchInputValue?.toString()}
+        value={searchData.searchInputValue?.toString()}
         onChange={handleInputChange}
       ></input>
       <button className={styles.submit}></button>

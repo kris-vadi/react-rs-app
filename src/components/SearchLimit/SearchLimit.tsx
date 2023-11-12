@@ -1,11 +1,13 @@
-import { BaseSyntheticEvent } from 'react';
+import { BaseSyntheticEvent, useContext } from 'react';
 import styles from './SearchLimit.module.scss';
-import { SearchLimitProps } from './SearchProps';
+import { DataContext } from '../../pages/Main/MainPage';
 
-const SearchLimit = (props: SearchLimitProps) => {
+const SearchLimit = () => {
+  const { searchData, setSearchData } = useContext(DataContext);
+
   function handleChange(event: BaseSyntheticEvent) {
-    props.setSearchData({
-      searchInputValue: props.searchData.searchInputValue,
+    setSearchData({
+      searchInputValue: searchData.searchInputValue,
       pageLimit: event.target.value,
       page: 1,
     });
@@ -15,7 +17,7 @@ const SearchLimit = (props: SearchLimitProps) => {
   return (
     <select
       className={styles.select}
-      value={props.searchData.pageLimit}
+      value={searchData.pageLimit}
       onChange={handleChange}
     >
       <option value="5">5</option>
