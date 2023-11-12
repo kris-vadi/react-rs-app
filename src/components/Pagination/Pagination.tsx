@@ -1,10 +1,11 @@
-import { PaginationProps } from './PaginationProps';
 import styles from './Pagination.module.scss';
 import { useContext } from 'react';
-import { DataContext } from '../../pages/Main/MainPage';
+import { DataContext } from '../ContextProvider/DataContext';
+import { ResponseDataContext } from '../ContextProvider/ResponseDataContext';
 
-const Pagination = (props: PaginationProps) => {
+const Pagination = () => {
   const { searchData, setSearchData } = useContext(DataContext);
+  const { responseData } = useContext(ResponseDataContext);
 
   function handlePrevButton() {
     setSearchData({
@@ -27,13 +28,13 @@ const Pagination = (props: PaginationProps) => {
       <button
         className={styles.prevButton}
         onClick={handlePrevButton}
-        disabled={props.responseData?.meta.pagination.current === 1}
+        disabled={responseData?.meta.pagination.current === 1}
       ></button>
       <div className={styles.pageNumber}>{searchData.page}</div>
       <button
         className={styles.nextButton}
         onClick={handleNextButton}
-        disabled={props.responseData?.meta.pagination.last === undefined}
+        disabled={responseData?.meta.pagination.last === undefined}
       ></button>
     </div>
   );

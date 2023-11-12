@@ -1,17 +1,21 @@
 import styles from './CardsList.module.scss';
 import Card from '../Card/Card';
-import { CardsListProps } from './CardListProps';
 import { CardParams } from '../../types/types';
 import Loader from '../UI/Loader/Loader';
+import { ResponseDataContext } from '../ContextProvider/ResponseDataContext';
+import { useContext } from 'react';
 
-const CardsList = (props: CardsListProps) => {
+const CardsList = () => {
+  const { isLoading, responseData } = useContext(ResponseDataContext);
+  const cards: CardParams[] | undefined = responseData?.data;
+
   function renderContent() {
-    if (props.isLoading) {
+    if (isLoading) {
       return <Loader />;
     }
 
-    if (props.cards && props.cards.length > 0) {
-      return props.cards.map((card: CardParams, index: number) => (
+    if (cards && cards.length > 0) {
+      return cards.map((card: CardParams, index: number) => (
         <Card key={`${card.attributes.name}${index}`} itemData={card} />
       ));
     }

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { DataContext } from '../../pages/Main/MainPage';
 import styles from './Search.module.scss';
+import { DataContext } from '../ContextProvider/DataContext';
 
 const Search = () => {
   const { searchData, setSearchData } = useContext(DataContext);

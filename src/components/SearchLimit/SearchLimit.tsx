@@ -1,6 +1,6 @@
 import { BaseSyntheticEvent, useContext } from 'react';
 import styles from './SearchLimit.module.scss';
-import { DataContext } from '../../pages/Main/MainPage';
+import { DataContext } from '../ContextProvider/DataContext';
 
 const SearchLimit = () => {
   const { searchData, setSearchData } = useContext(DataContext);

@@ -32,11 +32,7 @@
     transform: rotate(135deg);
   }
   &:disabled {
-    opacity: 0.1;
-    &:hover {
-      opacity: 0.1;
-      background-color: initial;
-    }
+    opacity: 0.2;
   }
 }
 
