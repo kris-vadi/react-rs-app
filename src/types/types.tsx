@@ -40,6 +40,7 @@ type Pagination = {
 
 export type SearchData = {
   searchInputValue: string | null;
+  pageLimit: string | null;
   page: number;
 };
 

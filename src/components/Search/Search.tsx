@@ -13,10 +13,6 @@ const Search = (props: SearchProps) => {
     localStorage.setItem('search-input', event.target.value.trim());
   }
 
-  function handleSearch() {
-    props.onSearch(inputValue);
-  }
-
   function handleSubmit(event: React.BaseSyntheticEvent) {
     event.preventDefault();
     props.onSearch(inputValue);
@@ -27,11 +23,11 @@ const Search = (props: SearchProps) => {
       <input
         className={styles.input}
         type="text"
-        placeholder="Search... your planet"
+        placeholder="Search..."
         value={inputValue}
         onChange={handleInputChange}
       ></input>
-      <button className={styles.submit} onClick={handleSearch}></button>
+      <button className={styles.submit}></button>
     </form>
   );
 };

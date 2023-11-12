@@ -4,7 +4,7 @@ import { BASE_URL } from './constants';
 const getCards = async (
   searchText?: string | null,
   page: number = 1,
-  limit: number = 10
+  limit: string | null = '10'
 ) => {
   try {
     const response = await fetch(

@@ -8,12 +8,16 @@ import Search from '../../components/Search/Search';
 import ErrorButton from '../../components/Error/ErrorButton';
 import Logo from '../../components/UI/Logo/Logo';
 import Pagination from '../../components/Pagination/Pagination';
+import SearchLimit from '../../components/SearchLimit/SearchLimit';
 
 const MainPage = () => {
   const [searchData, setSearchData] = useState<SearchData>({
     searchInputValue: localStorage.getItem('search-input')
       ? localStorage.getItem('search-input')
       : '',
+    pageLimit: localStorage.getItem('page-limit')
+      ? localStorage.getItem('page-limit')
+      : '10',
     page: 1,
   });
 
@@ -28,7 +32,8 @@ const MainPage = () => {
 
     const currentResponseData: ResponseData | undefined = await getCards(
       searchData.searchInputValue,
-      searchData.page
+      searchData.page,
+      searchData.pageLimit
     );
 
     if (currentResponseData) {
@@ -39,12 +44,25 @@ const MainPage = () => {
   }
 
   function handleSearch(newValue: string) {
-    setSearchData({ searchInputValue: newValue, page: 1 });
+    setSearchData({
+      searchInputValue: newValue,
+      pageLimit: searchData.pageLimit,
+      page: 1,
+    });
+  }
+
+  function handleChangeLimit(newValue: string) {
+    setSearchData({
+      searchInputValue: searchData.searchInputValue,
+      pageLimit: newValue,
+      page: searchData.page,
+    });
   }
 
   function onPageChange(page: number) {
     setSearchData({
       searchInputValue: searchData.searchInputValue,
+      pageLimit: searchData.pageLimit,
       page: page,
     });
   }
@@ -52,7 +70,7 @@ const MainPage = () => {
   useEffect(() => {
     getSearchResult();
     navigate(`/page/${searchData.page}`);
-  }, [searchData.searchInputValue, searchData.page]);
+  }, [searchData.page, searchData.pageLimit, searchData.searchInputValue]);
 
   return (
     <>
@@ -61,6 +79,10 @@ const MainPage = () => {
         <Search
           onSearch={handleSearch}
           inputInitialValue={searchData.searchInputValue}
+        />
+        <SearchLimit
+          onChangeLimit={handleChangeLimit}
+          value={searchData.pageLimit}
         />
         <ErrorButton />
       </header>
