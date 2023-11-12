@@ -19,6 +19,7 @@ const SearchLimit = () => {
       className={styles.select}
       value={searchData.pageLimit}
       onChange={handleChange}
+      data-testid="select"
     >
       <option value="5">5</option>
       <option value="10">10</option>

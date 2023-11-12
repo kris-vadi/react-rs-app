@@ -15,14 +15,14 @@ export type ResponseData = {
   meta: Meta;
 };
 
-type ActorAttributes = {
-  slug: string;
-  name: string | null;
-  gender: string | null;
-  nationality: string | null;
-  blood_status: string | null;
-  image: string | undefined;
-  species: string | null;
+export type ActorAttributes = {
+  slug?: string;
+  name?: string | null;
+  gender?: string | null;
+  nationality?: string | null;
+  blood_status?: string | null;
+  image?: string | undefined;
+  species?: string | null;
 };
 
 type Meta = {

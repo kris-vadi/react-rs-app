@@ -25,7 +25,9 @@ const CardsList = () => {
 
   return (
     <>
-      <div className={styles.list}>{renderContent()}</div>
+      <div className={styles.list} data-testid="list">
+        {renderContent()}
+      </div>
     </>
   );
 };

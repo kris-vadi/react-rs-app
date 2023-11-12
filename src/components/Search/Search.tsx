@@ -14,13 +14,13 @@ const Search = () => {
   }
 
   function handleInputChange(event: React.BaseSyntheticEvent) {
-    localStorage.setItem('search-input', event.target.value.trim());
-    setNewValue(event.target.value.trim());
+    setNewValue(event.target.value);
+    localStorage.setItem('search-input', event.target.value);
   }
 
   function handleSubmit(event: React.BaseSyntheticEvent) {
     event.preventDefault();
-    setNewValue(event.target.value.trim());
+    setNewValue(event.target.value);
   }
 
   return (
@@ -32,7 +32,7 @@ const Search = () => {
         value={searchData.searchInputValue?.toString()}
         onChange={handleInputChange}
       ></input>
-      <button className={styles.submit}></button>
+      <button className={styles.submit} aria-label="submit"></button>
     </form>
   );
 };
