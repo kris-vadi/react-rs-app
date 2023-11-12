@@ -16,20 +16,3 @@
 .content {
   flex: 1 20 auto;
 }
-
-.header {
-  background-color: $background;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 40px;
-  width: 100%;
-  gap: 20px;
-  z-index: 2;
-}
-
-@media screen and (max-width: 687px) {
-  .header {
-    flex-direction: column;
-  }
-}

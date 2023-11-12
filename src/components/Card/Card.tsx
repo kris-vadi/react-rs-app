@@ -1,5 +1,5 @@
 import styles from './Card.module.scss';
-import { CardProps } from '../../types/types';
+import { CardProps } from './CardProps';
 import { Link } from 'react-router-dom';
 import ItemInfoLine from '../UI/ItemInfoLine/ItemInfoLine';
 

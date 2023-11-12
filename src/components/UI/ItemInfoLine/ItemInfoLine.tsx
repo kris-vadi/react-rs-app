@@ -1,4 +1,4 @@
-import { ItemInfoLineProps } from '../../../types/types';
+import { ItemInfoLineProps } from './ItemInfoLineProps';
 import styles from './ItemInfoLine.module.scss';
 
 const ItemInfoLine = (props: ItemInfoLineProps) => {

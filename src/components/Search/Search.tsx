@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
 import styles from './Search.module.scss';
-import { SearchProps } from '../../types/types';
+import { SearchProps } from './SearchProps';
 
 const Search = (props: SearchProps) => {
-  const [inputValue, setInputValue] = useState<string>(
-    props.inputInitialValue ? props.inputInitialValue : ''
-  );
+  function setNewValue(newValue: string) {
+    props.setSearchData({
+      searchInputValue: newValue,
+      pageLimit: props.searchData.pageLimit,
+      page: 1,
+    });
+  }
 
   function handleInputChange(event: React.BaseSyntheticEvent) {
-    event.preventDefault();
-    setInputValue(event.target.value.trim());
     localStorage.setItem('search-input', event.target.value.trim());
+    setNewValue(event.target.value.trim());
   }
 
   function handleSubmit(event: React.BaseSyntheticEvent) {
     event.preventDefault();
-    props.onSearch(inputValue);
+    setNewValue(event.target.value.trim());
   }
 
   return (
@@ -24,7 +26,7 @@ const Search = (props: SearchProps) => {
         className={styles.input}
         type="text"
         placeholder="Search..."
-        value={inputValue}
+        value={props.searchData.searchInputValue?.toString()}
         onChange={handleInputChange}
       ></input>
       <button className={styles.submit}></button>

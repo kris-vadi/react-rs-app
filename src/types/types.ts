@@ -51,26 +51,3 @@ export type ErrorBoundaryProps = {
 export type ErrorBoundaryState = {
   hasError: boolean;
 };
-
-export interface CardsListProps {
-  cards: CardParams[] | undefined;
-  isLoading: boolean;
-}
-
-export interface SearchProps {
-  inputInitialValue: string | null;
-  onSearch: (value: string) => void;
-}
-
-export interface CardProps {
-  itemData: CardParams;
-}
-
-export interface CloseButtonProps {
-  callback: () => void;
-}
-
-export interface ItemInfoLineProps {
-  text: string;
-  description: string | null | undefined;
-}

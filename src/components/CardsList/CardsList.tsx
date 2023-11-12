@@ -1,6 +1,7 @@
 import styles from './CardsList.module.scss';
 import Card from '../Card/Card';
-import { CardParams, CardsListProps } from '../../types/types';
+import { CardsListProps } from './CardListProps';
+import { CardParams } from '../../types/types';
 import Loader from '../UI/Loader/Loader';
 
 const CardsList = (props: CardsListProps) => {
