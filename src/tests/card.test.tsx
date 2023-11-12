@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import App from '../App';
 import { userEvent } from '@testing-library/user-event';
@@ -44,10 +44,15 @@ describe('Tests for the Card component', () => {
   });
 
   it('Check that clicking triggers an additional API call to fetch detailed information', async () => {
-    // render(<App />);
-    // const item = (await screen.findByText('2-Headed Baby')).closest('a');
-    // if (item) await userEvent.click(item);
-    // await waitFor(() => {
-    // });
+    const spy = vi.spyOn(global, 'fetch');
+
+    render(<App />);
+
+    const item = (await screen.findByText('2-Headed Baby')).closest('a');
+    if (item) await userEvent.click(item);
+
+    await waitFor(async () => {
+      expect(spy).toHaveBeenCalled();
+    });
   });
 });
