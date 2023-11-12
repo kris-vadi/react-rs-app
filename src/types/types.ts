@@ -40,7 +40,7 @@ type Pagination = {
 
 export type SearchData = {
   searchInputValue: string | null;
-  pageLimit: string | null;
+  pageLimit: string | number | readonly string[] | undefined;
   page: number;
 };
 
@@ -64,12 +64,6 @@ export interface SearchProps {
 
 export interface CardProps {
   itemData: CardParams;
-}
-
-export interface PaginationProps {
-  onPage: (page: number) => void;
-  responseData: ResponseData | undefined;
-  page: number;
 }
 
 export interface CloseButtonProps {

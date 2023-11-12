@@ -1,22 +1,23 @@
-import { BaseSyntheticEvent, useState } from 'react';
+import { BaseSyntheticEvent } from 'react';
 import styles from './SearchLimit.module.scss';
-
-interface SearchLimitProps {
-  onChangeLimit: (value: string) => void;
-  value: string | null;
-}
+import { SearchLimitProps } from './SearchProps';
 
 const SearchLimit = (props: SearchLimitProps) => {
-  const [value, setValue] = useState<string>(props.value ? props.value : '10');
-
   function handleChange(event: BaseSyntheticEvent) {
-    props.onChangeLimit(event.target.value);
-    setValue(event.target.value);
+    props.setSearchData({
+      searchInputValue: props.searchData.searchInputValue,
+      pageLimit: event.target.value,
+      page: 1,
+    });
     localStorage.setItem('page-limit', event.target.value);
   }
 
   return (
-    <select className={styles.select} value={value} onChange={handleChange}>
+    <select
+      className={styles.select}
+      value={props.searchData.pageLimit}
+      onChange={handleChange}
+    >
       <option value="5">5</option>
       <option value="10">10</option>
       <option value="15">15</option>

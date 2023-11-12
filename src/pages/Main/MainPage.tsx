@@ -11,13 +11,21 @@ import Pagination from '../../components/Pagination/Pagination';
 import SearchLimit from '../../components/SearchLimit/SearchLimit';
 
 const MainPage = () => {
+  // const [searchData, setSearchData] = useState<SearchData>({
+  //   searchInputValue: localStorage.getItem('search-input')
+  //     ? localStorage.getItem('search-input')
+  //     : '',
+  //   pageLimit: localStorage.getItem('page-limit')
+  //     ? localStorage.getItem('page-limit')
+  //     : '10',
+  //   page: 1,
+  // });
+
   const [searchData, setSearchData] = useState<SearchData>({
     searchInputValue: localStorage.getItem('search-input')
       ? localStorage.getItem('search-input')
       : '',
-    pageLimit: localStorage.getItem('page-limit')
-      ? localStorage.getItem('page-limit')
-      : '10',
+    pageLimit: '10',
     page: 1,
   });
 
@@ -51,25 +59,13 @@ const MainPage = () => {
     });
   }
 
-  function handleChangeLimit(newValue: string) {
-    setSearchData({
-      searchInputValue: searchData.searchInputValue,
-      pageLimit: newValue,
-      page: searchData.page,
-    });
-  }
-
-  function onPageChange(page: number) {
-    setSearchData({
-      searchInputValue: searchData.searchInputValue,
-      pageLimit: searchData.pageLimit,
-      page: page,
-    });
+  function updateURL() {
+    navigate(`/page/${searchData.page}`);
   }
 
   useEffect(() => {
     getSearchResult();
-    navigate(`/page/${searchData.page}`);
+    updateURL();
   }, [searchData.page, searchData.pageLimit, searchData.searchInputValue]);
 
   return (
@@ -80,10 +76,7 @@ const MainPage = () => {
           onSearch={handleSearch}
           inputInitialValue={searchData.searchInputValue}
         />
-        <SearchLimit
-          onChangeLimit={handleChangeLimit}
-          value={searchData.pageLimit}
-        />
+        <SearchLimit setSearchData={setSearchData} searchData={searchData} />
         <ErrorButton />
       </header>
       <main className={styles.main}>
@@ -91,9 +84,9 @@ const MainPage = () => {
           <CardsList cards={responseData?.data} isLoading={isLoading} />
           {!isLoading && (
             <Pagination
-              onPage={onPageChange}
+              setSearchData={setSearchData}
+              searchData={searchData}
               responseData={responseData}
-              page={searchData.page}
             />
           )}
         </section>

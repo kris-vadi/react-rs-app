@@ -1,13 +1,21 @@
-import { PaginationProps } from '../../types/types';
+import { PaginationProps } from './PaginationProps';
 import styles from './Pagination.module.scss';
 
 const Pagination = (props: PaginationProps) => {
   function handlePrevButton() {
-    props.onPage(props.page - 1);
+    props.setSearchData({
+      searchInputValue: props.searchData.searchInputValue,
+      pageLimit: props.searchData.pageLimit,
+      page: props.searchData.page - 1,
+    });
   }
 
   function handleNextButton() {
-    props.onPage(props.page + 1);
+    props.setSearchData({
+      searchInputValue: props.searchData.searchInputValue,
+      pageLimit: props.searchData.pageLimit,
+      page: props.searchData.page + 1,
+    });
   }
 
   return (
@@ -17,7 +25,7 @@ const Pagination = (props: PaginationProps) => {
         onClick={handlePrevButton}
         disabled={props.responseData?.meta.pagination.current === 1}
       ></button>
-      <div className={styles.pageNumber}>{props.page}</div>
+      <div className={styles.pageNumber}>{props.searchData.page}</div>
       <button
         className={styles.nextButton}
         onClick={handleNextButton}
