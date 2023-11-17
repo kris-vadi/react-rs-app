@@ -35,6 +35,7 @@ const Pagination = () => {
         className={styles.nextButton}
         onClick={handleNextButton}
         disabled={responseData?.meta.pagination.last === undefined}
+        data-testid="next"
       ></button>
     </div>
   );
