@@ -11,8 +11,20 @@
   display: flex;
   justify-content: center;
   position: relative;
+  font-size: 2rem;
+  font-weight: 600;
+  & > p {
+    padding-top: 150px;
+  }
 }
 
 .content {
   flex: 1 20 auto;
+}
+
+.link {
+  color: $yellow;
+  &:hover {
+    text-decoration: underline;
+  }
 }

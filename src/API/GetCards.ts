@@ -8,7 +8,9 @@ const getCards = async (
 ) => {
   try {
     const response = await fetch(
-      `${BASE_URL}?filter[name_cont]=${searchText}&page[number]=${page}&page[size]=${limit}`
+      `${BASE_URL}?filter[name_cont]=${
+        searchText === undefined ? '' : searchText
+      }&page[number]=${page}&page[size]=${limit}`
     );
     const data: ResponseData = await response.json();
 

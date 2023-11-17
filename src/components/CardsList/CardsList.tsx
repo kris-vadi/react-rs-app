@@ -20,7 +20,7 @@ const CardsList = () => {
       ));
     }
 
-    return <p>{'Sorry, no items match your search...'}</p>;
+    return <p>Sorry, no items match your search...</p>;
   }
 
   return (

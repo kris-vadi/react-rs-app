@@ -20,7 +20,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     if (this.state.hasError) {
       return (
         <main className={styles.main}>
-          Something went wrong... Please reload the page.
+          <p>Something went wrong... Please reload the page.</p>
         </main>
       );
     }
