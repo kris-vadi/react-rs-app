@@ -6,7 +6,7 @@ import CardInfo from '../components/CardInfo/CardInfo';
 import NotFound from '../pages/NotFound/NotFound';
 
 describe('Tests for 404 page component', () => {
-  it('Ensure that the 404 page is displayed when navigating to an invalid route', async () => {
+  it('ensure that the 404 page is displayed when navigating to an invalid route', async () => {
     render(
       <MemoryRouter initialEntries={['/incorrect-route']}>
         <Routes>
