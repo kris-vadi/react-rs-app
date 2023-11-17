@@ -1,8 +1,10 @@
+import React from 'react';
 import { useContext } from 'react';
 import styles from './Search.module.scss';
 import { DataContext } from '../ContextProvider/DataContext';
+import { JSX } from 'react/jsx-runtime';
 
-const Search = () => {
+const Search = (): JSX.Element => {
   const { searchData, setSearchData } = useContext(DataContext);
 
   function setNewValue(newValue: string) {
@@ -13,14 +15,14 @@ const Search = () => {
     });
   }
 
-  function handleInputChange(event: React.BaseSyntheticEvent) {
+  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
     setNewValue(event.target.value);
     localStorage.setItem('search-input', event.target.value);
   }
 
-  function handleSubmit(event: React.BaseSyntheticEvent) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
     event.preventDefault();
-    setNewValue(event.target.value);
+    setNewValue((event.target as HTMLInputElement).value);
   }
 
   return (

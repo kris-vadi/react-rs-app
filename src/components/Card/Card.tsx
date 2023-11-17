@@ -16,10 +16,6 @@ const Card = (props: CardProps) => {
         description={props.itemData.attributes.gender}
       />
       <ItemInfoLine
-        text="blud status"
-        description={props.itemData.attributes.blood_status}
-      />
-      <ItemInfoLine
         text="nationality"
         description={props.itemData.attributes.nationality}
       />

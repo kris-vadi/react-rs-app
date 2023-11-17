@@ -3,19 +3,19 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import App from '../App';
 
 describe('Tests for CardList component', () => {
-  it('Verify that the component renders the specified number of cards', async () => {
+  it('verify that the component renders the specified number of cards', async () => {
     render(<App />);
 
     const select = screen.getByTestId('select');
     fireEvent.change(select, { target: { value: '5' } });
 
     await waitFor(() => {
-      const currentCards = screen.getAllByTestId('card');
-      expect(currentCards).toHaveLength(5);
+      const currentCards = screen.queryAllByTestId('card');
+      expect(currentCards.length).toBe(5);
     });
   });
 
-  it('Check that an appropriate message is displayed if no cards are present', async () => {
+  it('check that an appropriate message is displayed if no cards are present', async () => {
     render(<App />);
 
     const input = screen.getByPlaceholderText('Search...');
@@ -23,8 +23,13 @@ describe('Tests for CardList component', () => {
     fireEvent.change(input, { target: { value: 'aaabbbccc' } });
 
     await waitFor(() => {
-      const element = screen.findByText('Sorry, no items match your search...');
-      expect(element).toBeTruthy();
+      const cards = screen.queryAllByTestId('card');
+      expect(cards.length).toBe(0);
+
+      const element = screen.queryByText(
+        'Sorry, no items match your search...'
+      );
+      expect(element).toBeInTheDocument();
     });
   });
 });

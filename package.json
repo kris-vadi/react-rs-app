@@ -1,5 +1,5 @@
 {
-  "name": "react-rs-app",
+  "name": "react-2023q4",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,46 +7,47 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier . --check",
-    "format:fix": "prettier . --write",
-    "lint-staged": "lint-staged $STAGED_FILES",
+    "format:fix": "prettier ./src --write",
     "prepare": "husky install",
-    "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "test": "vitest run",
+    "coverage": "npx vitest run --coverage.enabled --coverage.provider=v8 --coverage.all --coverage.exclude=src/interfaces/interfaces.ts --coverage.exclude=.eslintrc.cjs --coverage.exclude=src/main.tsx"
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx,scss}": "prettier --write",
-    "src/**/*.{ts,tsx}": "eslint"
+    "**/*.(js|ts|jsx|tsx)": [
+      "npx prettier --write",
+      "npx eslint --fix"
+    ]
   },
   "dependencies": {
+    "classnames": "^2.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.18.0"
+    "react-router-dom": "^6.17.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.4",
-    "@testing-library/react": "^14.1.0",
-    "@testing-library/user-event": "^14.5.1",
-    "@types/react": "^18.2.15",
+    "@testing-library/react": "^14.0.0",
+    "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
-    "@vitejs/plugin-react": "^4.0.3",
+    "@vitejs/plugin-react-swc": "^3.3.2",
     "@vitest/coverage-v8": "^0.34.6",
-    "eslint": "^8.52.0",
+    "eslint": "^8.45.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "jsdom": "^22.1.0",
     "lint-staged": "^15.0.2",
+    "msw": "^2.0.5",
     "prettier": "^3.0.3",
-    "sass": "^1.69.5",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
     "vitest": "^0.34.6"

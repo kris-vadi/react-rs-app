@@ -79,7 +79,9 @@ const CardInfo = () => {
 
   return (
     <>
-      <section className={styles.details}>{renderContent()}</section>
+      <section className={styles.details} data-testid="details">
+        {renderContent()}
+      </section>
       <section className={styles.dimming} onClick={goBack}></section>
     </>
   );

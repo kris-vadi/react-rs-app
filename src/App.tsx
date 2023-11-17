@@ -4,7 +4,7 @@ import './styles/app.scss';
 import CardInfo from './components/CardInfo/CardInfo';
 import NotFound from './pages/NotFound/NotFound';
 
-const App = () => {
+const App = (): JSX.Element => {
   return (
     <BrowserRouter>
       <Routes>

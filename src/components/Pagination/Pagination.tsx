@@ -7,7 +7,7 @@ const Pagination = () => {
   const { searchData, setSearchData } = useContext(DataContext);
   const { responseData } = useContext(ResponseDataContext);
 
-  function handlePrevButton() {
+  function handlePrevButton(): void {
     setSearchData({
       searchInputValue: searchData.searchInputValue,
       pageLimit: searchData.pageLimit,
@@ -15,7 +15,7 @@ const Pagination = () => {
     });
   }
 
-  function handleNextButton() {
+  function handleNextButton(): void {
     setSearchData({
       searchInputValue: searchData.searchInputValue,
       pageLimit: searchData.pageLimit,
