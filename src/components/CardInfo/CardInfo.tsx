@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './CardInfo.module.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CardParams } from '../../types/types';
-import getCardInfo from '../../API/GetCardInfo';
+import getCardInfo from '../../API/getCardInfo';
 import Loader from '../UI/Loader/Loader';
 import CloseButton from '../UI/CloseButton/CloseButton';
 import ItemInfoLine from '../UI/ItemInfoLine/ItemInfoLine';

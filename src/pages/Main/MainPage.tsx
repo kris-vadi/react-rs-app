@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ResponseData, SearchData } from '../../types/types';
-import getCards from '../../API/GetCards';
+import getCards from '../../API/getCards';
 import MainContent from '../../components/MainContent/MainContent';
 import Header from '../../components/Header/Header';
 import { DataContext } from '../../components/ContextProvider/DataContext';
