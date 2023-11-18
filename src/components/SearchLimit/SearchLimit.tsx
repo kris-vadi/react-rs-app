@@ -1,23 +1,22 @@
-import { BaseSyntheticEvent, useContext } from 'react';
 import styles from './SearchLimit.module.scss';
-import { DataContext } from '../ContextProvider/DataContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { querySlice } from '../../store/slises/querySlise';
 
 const SearchLimit = () => {
-  const { searchData, setSearchData } = useContext(DataContext);
+  const dispatch = useDispatch();
+  const { pageLimit } = useSelector((state: RootState) => state.query);
+  const { setPageLimit } = querySlice.actions;
 
-  function handleChange(event: BaseSyntheticEvent) {
-    setSearchData({
-      searchInputValue: searchData.searchInputValue,
-      pageLimit: event.target.value,
-      page: 1,
-    });
+  function handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    dispatch(setPageLimit(event.target.value));
     localStorage.setItem('page-limit', event.target.value);
   }
 
   return (
     <select
       className={styles.select}
-      value={searchData.pageLimit}
+      value={pageLimit}
       onChange={handleChange}
       data-testid="select"
     >

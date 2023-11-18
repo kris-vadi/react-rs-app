@@ -6,9 +6,9 @@ import { RootState } from '../../store/store';
 import { querySlice } from '../../store/slises/querySlise';
 
 const Pagination = () => {
+  const dispatch = useDispatch();
   const { page } = useSelector((state: RootState) => state.query);
   const { setPage } = querySlice.actions;
-  const dispatch = useDispatch();
 
   const { responseData } = useContext(ResponseDataContext);
 
