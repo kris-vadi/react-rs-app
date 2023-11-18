@@ -1,22 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ResponseData, SearchData } from '../../types/types';
+import { ResponseData } from '../../types/types';
 import getCards from '../../API/getCards';
 import MainContent from '../../components/MainContent/MainContent';
 import Header from '../../components/Header/Header';
-import { DataContext } from '../../components/ContextProvider/DataContext';
 import { ResponseDataContext } from '../../components/ContextProvider/ResponseDataContext';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 const MainPage = () => {
-  const [searchData, setSearchData] = useState<SearchData>({
-    searchInputValue: localStorage.getItem('search-input')
-      ? localStorage.getItem('search-input')
-      : '',
-    pageLimit: localStorage.getItem('page-limit')
-      ? localStorage.getItem('page-limit')?.toString()
-      : '10',
-    page: 1,
-  });
+  const query = useSelector((state: RootState) => state.query);
 
   const navigate = useNavigate();
 
@@ -29,9 +22,9 @@ const MainPage = () => {
       setIsLoading(true);
 
       const currentResponseData: ResponseData | undefined = await getCards(
-        searchData.searchInputValue,
-        searchData.page,
-        searchData.pageLimit
+        query.searchInputValue,
+        query.page,
+        query.pageLimit
       );
 
       if (currentResponseData) {
@@ -43,16 +36,14 @@ const MainPage = () => {
 
     getSearchResult();
 
-    navigate(`/page/${searchData.page}`);
-  }, [searchData.page, searchData.pageLimit, searchData.searchInputValue]);
+    navigate(`/page/${query.page}`);
+  }, [query]);
 
   return (
-    <DataContext.Provider value={{ searchData, setSearchData }}>
-      <ResponseDataContext.Provider value={{ responseData, isLoading }}>
-        <Header />
-        <MainContent />
-      </ResponseDataContext.Provider>
-    </DataContext.Provider>
+    <ResponseDataContext.Provider value={{ responseData, isLoading }}>
+      <Header />
+      <MainContent />
+    </ResponseDataContext.Provider>
   );
 };
 

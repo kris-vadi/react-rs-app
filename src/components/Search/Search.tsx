@@ -1,18 +1,17 @@
 import React from 'react';
-import { useContext } from 'react';
 import styles from './Search.module.scss';
-import { DataContext } from '../ContextProvider/DataContext';
 import { JSX } from 'react/jsx-runtime';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../store/store';
+import { querySlice } from '../../store/slises/querySlise';
 
 const Search = (): JSX.Element => {
-  const { searchData, setSearchData } = useContext(DataContext);
+  const { searchInputValue } = useSelector((state: RootState) => state.query);
+  const dispatch = useDispatch();
+  const { setSearchValue } = querySlice.actions;
 
   function setNewValue(newValue: string) {
-    setSearchData({
-      searchInputValue: newValue,
-      pageLimit: searchData.pageLimit,
-      page: 1,
-    });
+    dispatch(setSearchValue(newValue));
   }
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
@@ -31,7 +30,7 @@ const Search = (): JSX.Element => {
         className={styles.input}
         type="text"
         placeholder="Search..."
-        value={searchData.searchInputValue?.toString()}
+        value={searchInputValue?.toString()}
         onChange={handleInputChange}
       ></input>
       <button className={styles.submit} aria-label="submit"></button>
