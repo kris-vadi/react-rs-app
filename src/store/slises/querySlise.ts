@@ -19,10 +19,13 @@ export const querySlice = createSlice({
     setPageLimit(state, action: PayloadAction<string>) {
       console.log(state);
       console.log(action);
+      state.pageLimit = action.payload;
+      state.page = 1;
     },
     setPage(state, action: PayloadAction<number>) {
       console.log(state);
       console.log(action);
+      state.page = action.payload;
     },
   },
 });
