@@ -1,26 +1,23 @@
 import styles from './Pagination.module.scss';
 import { useContext } from 'react';
-import { DataContext } from '../ContextProvider/DataContext';
 import { ResponseDataContext } from '../ContextProvider/ResponseDataContext';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../store/store';
+import { querySlice } from '../../store/slises/querySlise';
 
 const Pagination = () => {
-  const { searchData, setSearchData } = useContext(DataContext);
+  const { page } = useSelector((state: RootState) => state.query);
+  const { setPage } = querySlice.actions;
+  const dispatch = useDispatch();
+
   const { responseData } = useContext(ResponseDataContext);
 
   function handlePrevButton(): void {
-    setSearchData({
-      searchInputValue: searchData.searchInputValue,
-      pageLimit: searchData.pageLimit,
-      page: searchData.page - 1,
-    });
+    dispatch(setPage(page - 1));
   }
 
   function handleNextButton(): void {
-    setSearchData({
-      searchInputValue: searchData.searchInputValue,
-      pageLimit: searchData.pageLimit,
-      page: searchData.page + 1,
-    });
+    dispatch(setPage(page + 1));
   }
 
   return (
@@ -30,7 +27,7 @@ const Pagination = () => {
         onClick={handlePrevButton}
         disabled={responseData?.meta.pagination.current === 1}
       ></button>
-      <div className={styles.pageNumber}>{searchData.page}</div>
+      <div className={styles.pageNumber}>{page}</div>
       <button
         className={styles.nextButton}
         onClick={handleNextButton}

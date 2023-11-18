@@ -15,6 +15,7 @@ export const querySlice = createSlice({
       console.log(state);
       console.log(action);
       state.searchInputValue = action.payload;
+      state.page = 1;
     },
     setPageLimit(state, action: PayloadAction<string>) {
       console.log(state);
