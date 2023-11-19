@@ -39,8 +39,8 @@ type Pagination = {
 };
 
 export type SearchData = {
-  searchInputValue: string | null;
-  pageLimit: string | number | readonly string[] | undefined;
+  searchInputValue: string;
+  pageLimit: string;
   page: number;
 };
 

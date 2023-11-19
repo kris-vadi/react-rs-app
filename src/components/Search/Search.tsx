@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Search.module.scss';
 import { JSX } from 'react/jsx-runtime';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,23 +6,32 @@ import { RootState } from '../../store/store';
 import { querySlice } from '../../store/slises/querySlise';
 
 const Search = (): JSX.Element => {
-  const { searchInputValue } = useSelector((state: RootState) => state.query);
   const dispatch = useDispatch();
+  const { searchInputValue } = useSelector((state: RootState) => state.query);
   const { setSearchValue } = querySlice.actions;
+  const [currentValue, setCurrentValue] = useState(searchInputValue);
 
   function setNewValue(newValue: string) {
     dispatch(setSearchValue(newValue));
   }
 
-  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    setNewValue(event.target.value);
-    localStorage.setItem('search-input', event.target.value);
-  }
+  const handleSearch = () => {
+    localStorage.setItem('search-input', currentValue);
+    setNewValue(currentValue);
+  };
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    const newValue = event.target.value.trim();
+    setCurrentValue(newValue);
+    localStorage.setItem('search-input', newValue);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    setNewValue((event.target as HTMLInputElement).value);
-  }
+    handleSearch();
+  };
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -30,10 +39,14 @@ const Search = (): JSX.Element => {
         className={styles.input}
         type="text"
         placeholder="Search..."
-        value={searchInputValue?.toString()}
+        value={currentValue}
         onChange={handleInputChange}
       ></input>
-      <button className={styles.submit} aria-label="submit"></button>
+      <button
+        className={styles.submit}
+        aria-label="submit"
+        onChange={handleSearch}
+      ></button>
     </form>
   );
 };

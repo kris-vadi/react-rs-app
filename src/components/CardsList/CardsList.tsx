@@ -1,18 +1,22 @@
 import styles from './CardsList.module.scss';
 import Card from '../Card/Card';
 import { CardParams } from '../../types/types';
-import Loader from '../UI/Loader/Loader';
-import { ResponseDataContext } from '../ContextProvider/ResponseDataContext';
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { charactersApi } from '../../services/charactersApi';
 
 const CardsList = () => {
-  const { isLoading, responseData } = useContext(ResponseDataContext);
-  const cards: CardParams[] | undefined = responseData?.data;
+  const query = useSelector((state: RootState) => state.query);
+  const { data } = charactersApi.useGetCardsQuery(query);
+  const cards: CardParams[] | undefined = data?.data;
+  // const { isLoading, responseData } = useContext(ResponseDataContext);
 
-  function renderContent() {
-    if (isLoading) {
-      return <Loader />;
-    }
+  //const cards: CardParams[] | undefined = responseData?.data;
+
+  function renderContent(): JSX.Element | JSX.Element[] {
+    // if (isLoading) {
+    //   return <Loader />;
+    // }
 
     if (cards && cards.length > 0) {
       return cards.map((card: CardParams, index: number) => (

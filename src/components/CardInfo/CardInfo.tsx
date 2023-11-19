@@ -1,38 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styles from './CardInfo.module.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CardParams } from '../../types/types';
-import getCardInfo from '../../API/getCardInfo';
-import Loader from '../UI/Loader/Loader';
 import CloseButton from '../UI/CloseButton/CloseButton';
 import ItemInfoLine from '../UI/ItemInfoLine/ItemInfoLine';
 import { getCardId } from '../../utils/utils';
+import { charactersApi } from '../../services/charactersApi';
 
 const CardInfo = () => {
-  const [responseData, setResponseData] = useState<CardParams>();
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
   const location = useLocation();
 
   const navigate = useNavigate();
 
   const goBack = () => navigate(-1);
 
-  async function getSearchResult(id: string) {
-    setIsLoading(true);
+  let responseData: CardParams | undefined;
 
-    const currentResponseData: CardParams | undefined = await getCardInfo(id);
+  function getSearchResult(id: string) {
+    // setIsLoading(true);
 
-    if (currentResponseData) {
-      setResponseData(currentResponseData);
-    }
+    const { data } = charactersApi.useGetCardInfoQuery(id);
+    console.log(data);
+    responseData = data?.data;
 
-    setIsLoading(false);
+    // setIsLoading(false);
   }
 
   useEffect(() => {
     const id: string | undefined = getCardId(location.pathname);
+    console.log(id);
 
     if (id) {
       getSearchResult(id);
@@ -42,9 +38,9 @@ const CardInfo = () => {
   }, [location.pathname, navigate]);
 
   function renderContent() {
-    if (isLoading) {
-      return <Loader />;
-    }
+    // if (isLoading) {
+    //   return <Loader />;
+    // }
 
     return (
       <>

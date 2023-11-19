@@ -3,7 +3,7 @@ import { CardProps } from './CardProps';
 import { Link } from 'react-router-dom';
 import ItemInfoLine from '../UI/ItemInfoLine/ItemInfoLine';
 
-const Card = (props: CardProps) => {
+const Card = (props: CardProps): JSX.Element => {
   return (
     <Link
       to={`details/${props.itemData.id}`}
