@@ -2,14 +2,19 @@ import { describe, it, expect } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import Search from '../components/Search/Search';
 import { MemoryRouter } from 'react-router';
-import MainPage from '../pages/Main/MainPage';
+
+vi.mock('react-redux', () => {
+  return {
+    useSelector: vi.fn().mockReturnValue({}),
+    useDispatch: vi.fn(),
+  };
+});
 
 describe('Tests for Search component', () => {
   it('verify that clicking the Search button saves the entered value to the local storage', async () => {
     render(<Search />);
 
     const input = screen.getByPlaceholderText('Search...');
-
     fireEvent.change(input, { target: { value: 'testSearchValue' } });
 
     const currentValue = await localStorage.getItem('search-input');
@@ -22,7 +27,7 @@ describe('Tests for Search component', () => {
 
     render(
       <MemoryRouter>
-        <MainPage />
+        <Search />
       </MemoryRouter>
     );
 

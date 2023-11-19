@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SearchData } from '../../types/types';
 
-const initialState: SearchData = {
+export const initialState: SearchData = {
   searchInputValue: '',
   pageLimit: '10',
   page: 1,

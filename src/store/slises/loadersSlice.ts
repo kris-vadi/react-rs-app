@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LoadingState } from '../../types/types';
 
-const initialState: LoadingState = {
+export const initialState: LoadingState = {
   value: true,
 };
 

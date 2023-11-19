@@ -19,7 +19,6 @@ describe('Tests for 404 page component', () => {
       </MemoryRouter>
     );
 
-    screen.debug();
     const notFound = await screen.getByText('404 Page Not Found');
     expect(notFound).toBeInTheDocument();
   });

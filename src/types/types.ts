@@ -21,14 +21,14 @@ export type ActorAttributes = {
   gender?: string | null;
   nationality?: string | null;
   blood_status?: string | null;
-  image?: string | undefined;
+  image?: string | undefined | null;
   species?: string | null;
 };
 
 type Meta = {
   pagination: Pagination;
   copyright: string;
-  geterated_at: string;
+  generated_at: string;
 };
 
 export type Pagination = {
