@@ -1,0 +1,30 @@
+@import '../../styles/variables.scss';
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input {
+  min-height: 48px;
+  min-width: 100px;
+  padding: 15px 40px;
+  border-radius: 50px 0 0 50px;
+  font-style: italic;
+}
+
+.submit {
+  min-height: 48px;
+  min-width: 50px;
+  border-radius: 0 50px 50px 0;
+  background-image: url('../../assets/icons/search-icon.svg');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: contain;
+  background-color: $button;
+  transition: all 0.5s ease-in-out;
+  &:hover {
+    background-color: darken($button, 5%);
+  }
+}
