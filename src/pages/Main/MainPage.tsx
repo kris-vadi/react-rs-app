@@ -12,8 +12,6 @@ const MainPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const [isLoading, setIsLoading] = useState<boolean>(false);
-
   useEffect(() => {
     const inputValueMemorized: string | null =
       localStorage.getItem('search-input');

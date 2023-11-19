@@ -2,17 +2,18 @@ import { Outlet } from 'react-router-dom';
 import styles from './MainContent.module.scss';
 import Pagination from '../Pagination/Pagination';
 import CardsList from '../CardsList/CardsList';
-import { useContext } from 'react';
-import { ResponseDataContext } from '../ContextProvider/ResponseDataContext';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 const MainContent = () => {
-  const { isLoading } = useContext(ResponseDataContext);
+  const isCardsLoading = useSelector((state: RootState) => state.cardsLoader);
+  console.log(isCardsLoading.value);
 
   return (
     <main className={styles.main}>
       <section className={styles.content}>
         <CardsList />
-        {!isLoading && <Pagination />}
+        {!isCardsLoading.value && <Pagination />}
       </section>
       <Outlet />
     </main>
