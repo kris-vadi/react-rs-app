@@ -13,7 +13,6 @@ const MainPage = () => {
   const navigate = useNavigate();
 
   // const [isLoading, setIsLoading] = useState<boolean>(false);
-  // const [responseData, setResponseData] = useState<ResponseData>();
 
   useEffect(() => {
     const inputValueMemorized: string | null =

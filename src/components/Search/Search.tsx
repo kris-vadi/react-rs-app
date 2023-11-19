@@ -9,11 +9,16 @@ const Search = (): JSX.Element => {
   const dispatch = useDispatch();
   const { searchInputValue } = useSelector((state: RootState) => state.query);
   const { setSearchValue } = querySlice.actions;
-  const [currentValue, setCurrentValue] = useState(searchInputValue);
 
-  function setNewValue(newValue: string) {
+  const inputValueMemorized: string | null =
+    localStorage.getItem('search-input');
+  const [currentValue, setCurrentValue] = useState(
+    inputValueMemorized ? inputValueMemorized : searchInputValue
+  );
+
+  const setNewValue = (newValue: string) => {
     dispatch(setSearchValue(newValue));
-  }
+  };
 
   const handleSearch = () => {
     localStorage.setItem('search-input', currentValue);

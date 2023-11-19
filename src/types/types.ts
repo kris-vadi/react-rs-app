@@ -51,3 +51,7 @@ export type ErrorBoundaryProps = {
 export type ErrorBoundaryState = {
   hasError: boolean;
 };
+
+export type LoadingState = {
+  value: boolean;
+};
