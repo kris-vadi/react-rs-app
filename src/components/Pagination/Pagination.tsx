@@ -1,6 +1,4 @@
 import styles from './Pagination.module.scss';
-import { useContext } from 'react';
-import { ResponseDataContext } from '../ContextProvider/ResponseDataContext';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/store';
 import { querySlice } from '../../store/slises/querySlise';
@@ -9,8 +7,9 @@ const Pagination = () => {
   const dispatch = useDispatch();
   const { page } = useSelector((state: RootState) => state.query);
   const { setPage } = querySlice.actions;
-
-  const { responseData } = useContext(ResponseDataContext);
+  const paginationData = useSelector(
+    (state: RootState) => state.paginationData
+  );
 
   function handlePrevButton(): void {
     dispatch(setPage(page - 1));
@@ -25,13 +24,13 @@ const Pagination = () => {
       <button
         className={styles.prevButton}
         onClick={handlePrevButton}
-        disabled={responseData?.meta.pagination.current === 1}
+        disabled={page === 1}
       ></button>
       <div className={styles.pageNumber}>{page}</div>
       <button
         className={styles.nextButton}
         onClick={handleNextButton}
-        disabled={responseData?.meta.pagination.last === undefined}
+        disabled={paginationData.value.next === undefined}
         data-testid="next"
       ></button>
     </div>

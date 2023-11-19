@@ -7,13 +7,21 @@ import { charactersApi } from '../../services/charactersApi';
 import { cardsLoader } from '../../store/slises/loadersSlice';
 import Loader from '../UI/Loader/Loader';
 import { useEffect } from 'react';
+import { paginationSlice } from '../../store/slises/paginationSlice';
 
 const CardsList = () => {
   const dispatch = useDispatch();
   const query = useSelector((state: RootState) => state.query);
   const { setCardsLoader } = cardsLoader.actions;
+  const { setPaginationData } = paginationSlice.actions;
 
   const { data, isLoading, error } = charactersApi.useGetCardsQuery(query);
+
+  dispatch(
+    setPaginationData({
+      next: data?.meta.pagination.next,
+    })
+  );
 
   useEffect(() => {
     dispatch(setCardsLoader(isLoading));

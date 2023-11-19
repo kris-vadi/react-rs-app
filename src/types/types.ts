@@ -31,11 +31,11 @@ type Meta = {
   geterated_at: string;
 };
 
-type Pagination = {
-  current: number;
-  next: number;
-  last: number;
-  records: number;
+export type Pagination = {
+  current?: number;
+  next?: number;
+  last?: number;
+  records?: number;
 };
 
 export type SearchData = {
