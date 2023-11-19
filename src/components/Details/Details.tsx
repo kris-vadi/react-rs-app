@@ -5,21 +5,20 @@ import { detailsLoader } from '../../store/slises/loadersSlice';
 import styles from './Details.module.scss';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 const Details = (): JSX.Element => {
   const dispatch = useDispatch();
   const location = useLocation();
   const { setDetailsLoader } = detailsLoader.actions;
 
-  const id: string | undefined = getCardId(location.pathname);
-
-  if (!id) {
-    return <p>Character id error...</p>;
-  }
+  const id: string = getCardId(location.pathname);
 
   const { data, isLoading, error } = charactersApi.useGetCardInfoQuery(id);
 
-  dispatch(setDetailsLoader(isLoading));
+  useEffect(() => {
+    dispatch(setDetailsLoader(isLoading));
+  }, [isLoading]);
 
   if (error) {
     return <p>The server returned an error...</p>;

@@ -9,6 +9,7 @@ import Loader from '../UI/Loader/Loader';
 const CardInfo = (): JSX.Element => {
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
+
   const isDetailsLoading = useSelector(
     (state: RootState) => state.detailsLoader
   );

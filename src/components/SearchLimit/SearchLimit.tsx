@@ -8,10 +8,10 @@ const SearchLimit = () => {
   const { pageLimit } = useSelector((state: RootState) => state.query);
   const { setPageLimit } = querySlice.actions;
 
-  function handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(setPageLimit(event.target.value));
     localStorage.setItem('page-limit', event.target.value);
-  }
+  };
 
   return (
     <select

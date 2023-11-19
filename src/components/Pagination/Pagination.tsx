@@ -11,13 +11,13 @@ const Pagination = () => {
     (state: RootState) => state.paginationData
   );
 
-  function handlePrevButton(): void {
+  const handlePrevButton = (): void => {
     dispatch(setPage(page - 1));
-  }
+  };
 
-  function handleNextButton(): void {
+  const handleNextButton = (): void => {
     dispatch(setPage(page + 1));
-  }
+  };
 
   return (
     <div className={styles.pagination}>

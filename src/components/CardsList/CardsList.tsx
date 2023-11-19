@@ -17,11 +17,13 @@ const CardsList = () => {
 
   const { data, isLoading, error } = charactersApi.useGetCardsQuery(query);
 
-  dispatch(
-    setPaginationData({
-      next: data?.meta.pagination.next,
-    })
-  );
+  useEffect(() => {
+    dispatch(
+      setPaginationData({
+        next: data?.meta.pagination.next,
+      })
+    );
+  }, [data]);
 
   useEffect(() => {
     dispatch(setCardsLoader(isLoading));
@@ -46,11 +48,9 @@ const CardsList = () => {
   };
 
   return (
-    <>
-      <div className={styles.list} data-testid="list">
-        {renderContent()}
-      </div>
-    </>
+    <div className={styles.list} data-testid="list">
+      {renderContent()}
+    </div>
   );
 };
 
