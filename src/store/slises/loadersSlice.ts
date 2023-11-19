@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LoadingState } from '../../types/types';
 
 const initialState: LoadingState = {
-  value: false,
+  value: true,
 };
 
 export const cardsLoader = createSlice({

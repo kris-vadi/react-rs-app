@@ -6,6 +6,7 @@ import { RootState } from '../../store/store';
 import { charactersApi } from '../../services/charactersApi';
 import { cardsLoader } from '../../store/slises/loadersSlice';
 import Loader from '../UI/Loader/Loader';
+import { useEffect } from 'react';
 
 const CardsList = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,10 @@ const CardsList = () => {
   const { setCardsLoader } = cardsLoader.actions;
 
   const { data, isLoading, error } = charactersApi.useGetCardsQuery(query);
-  dispatch(setCardsLoader(isLoading));
+
+  useEffect(() => {
+    dispatch(setCardsLoader(isLoading));
+  }, [isLoading]);
 
   const renderContent = (): JSX.Element | JSX.Element[] => {
     if (isLoading) {

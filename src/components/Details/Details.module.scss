@@ -1,0 +1,12 @@
+@import '../../styles/variables.scss';
+
+.image {
+  width: 50%;
+  border-radius: 10px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: $yellow;
+}

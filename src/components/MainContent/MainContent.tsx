@@ -7,7 +7,6 @@ import { RootState } from '../../store/store';
 
 const MainContent = () => {
   const isCardsLoading = useSelector((state: RootState) => state.cardsLoader);
-  console.log(isCardsLoading.value);
 
   return (
     <main className={styles.main}>
